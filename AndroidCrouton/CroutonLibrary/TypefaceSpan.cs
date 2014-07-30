@@ -61,7 +61,7 @@ namespace CroutonLibrary
 
             if (mTypeface == null)
             {
-                mTypeface = Typeface.CreateFromAsset(context.ApplicationContext.Assets, String.Format("%s", typefaceName));
+                mTypeface = Typeface.CreateFromAsset(context.ApplicationContext.Assets, String.Format("{0}", typefaceName));
 
                 // Cache the loaded Typeface
                 sTypefaceCache.Put(typefaceName, mTypeface);
