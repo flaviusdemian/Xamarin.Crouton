@@ -281,7 +281,7 @@ namespace CroutonLibrary
             // ActionBar overlay is only available as of Android 3.0 Honeycomb.
             if (Build.VERSION.SdkInt >= Build.VERSION_CODES.Honeycomb)
             {
-                bool flags = activity.Window.HasFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+                bool flags = activity.Window.HasFeature(WindowFeatures.ActionBarOverlay);
                 if (flags)
                 {
                     setActionBarMargin(parameters, activity);
@@ -487,14 +487,14 @@ namespace CroutonLibrary
                 // Prior to SDK 16, announcements could only be made through FOCUSED
                 // events. Jelly Bean (SDK 16) added support for speaking text verbatim
                 // using the ANNOUNCEMENT event type.
-                int eventType;
+                EventTypes eventType;
                 if ((int) Build.VERSION.SdkInt < 16)
                 {
-                    eventType = AccessibilityEvent.TYPE_VIEW_FOCUSED;
+                    eventType = EventTypes.ViewFocused;
                 }
                 else
                 {
-                    eventType = AccessibilityEvent.TYPE_ANNOUNCEMENT;
+                    eventType = EventTypes.Announcement;
                 }
 
                 // Construct an accessibility event with the minimum recommended
@@ -511,7 +511,7 @@ namespace CroutonLibrary
             }
         }
 
-        public override String ToString()
+        public override System.String ToString()
         {
             return "Manager{" +
                    "croutonQueue=" + croutonQueue +
