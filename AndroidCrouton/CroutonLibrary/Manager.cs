@@ -267,7 +267,9 @@ namespace CroutonLibrary
             if (Build.VERSION.SdkInt >= Build.VERSION_CODES.Kitkat)
             {
                 int flags = (int)activity.Window.Attributes.Flags;
-                int translucentStatusFlag = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+                int translucentStatusFlag = 0;
+                //TODO: FIX
+                //int translucentStatusFlag = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
                 if ((flags & translucentStatusFlag) == translucentStatusFlag)
                 {
                     setActionBarMargin(parameters, activity);
