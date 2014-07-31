@@ -1,14 +1,7 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
-using Android.Content;
 using Android.Content.Res;
 using Android.Graphics;
 using Android.Graphics.Drawables;
-using Android.OS;
-using Android.Runtime;
 using Android.Text;
 using Android.Util;
 using Android.Views;
@@ -28,7 +21,6 @@ namespace CroutonLibrary
         private Style style;
         private Configuration configuration = null;
         private View customView;
-
         private View.IOnClickListener onClickListener;
 
         private Activity activity;
@@ -231,6 +223,7 @@ namespace CroutonLibrary
          */
         public static Crouton makeText(Activity activity, int textResourceId, Style style)
         {
+            //TODO: fix this
             return makeText(activity, activity.GetString(textResourceId), style);
         }
 
@@ -251,7 +244,7 @@ namespace CroutonLibrary
          */
         public static Crouton makeText(Activity activity, int textResourceId, Style style, ViewGroup viewGroup)
         {
-            return makeText(activity, activity.GetString(textResourceId), style, viewGroup);
+            return makeText(activity, activity.Resources.GetString(textResourceId), style, viewGroup);
         }
 
         /**
@@ -873,14 +866,16 @@ namespace CroutonLibrary
             croutonView.LayoutParameters = new FrameLayout.LayoutParams(width != 0 ? width : FrameLayout.LayoutParams.MatchParent, height);
 
             // set background
-            if (this.style.backgroundColorValue != Style.NOT_SET)
-            {
-                croutonView.SetBackgroundColor(resources.GetColor(this.style.backgroundColorValue));
-            }
-            else
-            {
-                croutonView.SetBackgroundColor(resources.GetColor(this.style.backgroundColorResourceId));
-            }
+            //if (this.style.backgroundColorValue != Style.NOT_SET)
+            //{
+            //    //TODO: FIX
+            //    //croutonView.SetBackgroundColor(resources.GetColor(this.style.backgroundColorValue));
+            //    croutonView.SetBackgroundColor(resources.GetColor(this.style.backgroundColorResourceId));
+            //}
+            //else
+            //{
+            //    croutonView.SetBackgroundColor(resources.GetColor(this.style.backgroundColorResourceId));
+            //}
 
             // set the background drawable if set. This will override the background
             // color.
@@ -966,14 +961,15 @@ namespace CroutonLibrary
             text.Gravity = (GravityFlags)this.style.gravity;
 
             // set the text color if set
-            if (this.style.textColorValue != Style.NOT_SET)
-            {
-                text.SetTextColor(resources.GetColor(this.style.textColorValue));
-            }
-            else if (this.style.textColorResourceId != 0)
-            {
-                text.SetTextColor(resources.GetColor(this.style.textColorResourceId));
-            }
+            //if (this.style.textColorValue != Style.NOT_SET)
+            //{
+            //    //TODO: FIX
+            //    //text.SetTextColor(resources.GetColor(this.style.textColorValue));
+            //}
+            //else if (this.style.textColorResourceId != 0)
+            //{
+            //    text.SetTextColor(resources.GetColor(this.style.textColorResourceId));
+            //}
 
             // Set the text size. If the user has set a text size and text
             // appearance, the text size in the text appearance

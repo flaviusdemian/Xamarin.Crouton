@@ -1,10 +1,11 @@
+using System;
 namespace CroutonLibrary
 {
     public class Messages
     {
-        public const uint DISPLAY_CROUTON = 0xc2007;
-        public const uint ADD_CROUTON_TO_VIEW = 0xc20074dd;
-        public const uint REMOVE_CROUTON = 0xc2007de1;
+        public const int DISPLAY_CROUTON = 0xc2007;
+        public const int ADD_CROUTON_TO_VIEW = 0xc2008;
+        public const int REMOVE_CROUTON = 0xc2009;
 
         private Messages()
         {

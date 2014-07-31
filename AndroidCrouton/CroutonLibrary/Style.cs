@@ -1,18 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
 using Android.Graphics.Drawables;
-using Android.OS;
-using Android.Runtime;
 using Android.Widget;
-using Android.Graphics.Drawables;
-using Android.Views;
-using Android.Widget;
-
 
 namespace CroutonLibrary
 {
@@ -35,8 +23,8 @@ namespace CroutonLibrary
     //package de.keyboardsurfer.android.widget.crouton;
 
 
-
     /** The style for a {@link Crouton}. */
+
     public class Style
     {
         public static int NOT_SET = -1;
@@ -51,25 +39,6 @@ namespace CroutonLibrary
         /** Default style for general information. */
         public static Style INFO;
 
-        static Style()
-        {
-            ALERT = new StyleBuilder()
-              .setBackgroundColorValue((int)holoRedLight)
-              .build();
-            CONFIRM = new StyleBuilder()
-              .setBackgroundColorValue((int)holoGreenLight)
-              .build();
-            INFO = new StyleBuilder()
-              .setBackgroundColorValue((int)holoBlueLight)
-              .build();
-        }
-
-        /**
-         * The {@link Configuration} for this {@link Style}.
-         * It can be overridden via {@link Crouton#setConfiguration(Configuration)}.
-         */
-        public Configuration configuration;
-
         /**
          * The resource id of the backgroundResourceId.
          * <p/>
@@ -82,7 +51,6 @@ namespace CroutonLibrary
          * <p/>
          * 0 for no backgroundDrawableResourceId.
          */
-        public int backgroundDrawableResourceId;
 
         /**
          * The backgroundColorResourceValue's e.g. 0xffff4444;
@@ -90,38 +58,19 @@ namespace CroutonLibrary
          * NOT_SET for no value.
          */
         public int backgroundColorValue;
+        public int backgroundDrawableResourceId;
+        public Configuration configuration;
+        public String fontName;
+
+        /** The file path and font name resource id for the view content */
+        public int fontNameResId;
 
         /** Whether we should isTileEnabled the backgroundResourceId or not. */
-        public  bool isTileEnabled;
-
-        /**
-         * The text colorResourceId's resource id.
-         * <p/>
-         * 0 sets the text colorResourceId to the system theme default.
-         */
-        public int textColorResourceId;
-
-        /**
-         * The textColorResourceValue's e.g. 0xffff4444;
-         * <p/>
-         * NOT_SET for no value.
-         */
-        public int textColorValue;
-
-        /** The height of the {@link Crouton} in pixels. */
-        public int heightInPixels;
-
-        /** Resource ID for the height of the {@link Crouton}. */
-        public int heightDimensionResId;
-
-        /** The width of the {@link Crouton} in pixels. */
-        public int widthInPixels;
-
-        /** Resource ID for the width of the {@link Crouton}. */
-        public int widthDimensionResId;
 
         /** The text's gravity as provided by {@link Gravity}. */
         public int gravity;
+        public int heightDimensionResId;
+        public int heightInPixels;
 
         /** An additional image to display in the {@link Crouton}. */
         public Drawable imageDrawable;
@@ -131,100 +80,111 @@ namespace CroutonLibrary
 
         /** The {@link ImageView.ScaleType} for the image to display in the {@link Crouton}. */
         public ImageView.ScaleType imageScaleType;
+        public bool isTileEnabled;
+        public int paddingDimensionResId;
+        public int paddingInPixels;
+        public int textAppearanceResId;
+        public int textColorResourceId;
+
+        /**
+         * The textColorResourceValue's e.g. 0xffff4444;
+         * <p/>
+         * NOT_SET for no value.
+         */
+        public int textColorValue;
 
         /**
          * The text size in sp
          * <p/>
          * 0 sets the text size to the system theme default
          */
-        public int textSize;
 
         /** The text shadow color's resource id */
         public int textShadowColorResId;
 
         /** The text shadow radius */
-        public float textShadowRadius;
-
-        /** The text shadow vertical offset */
-        public float textShadowDy;
 
         /** The text shadow horizontal offset */
         public float textShadowDx;
+        public float textShadowDy;
+        public float textShadowRadius;
+        public int textSize;
+        public int widthDimensionResId;
+        public int widthInPixels;
+
+        static Style()
+        {
+            ALERT = new StyleBuilder()
+                .setBackgroundColorValue((int) holoRedLight)
+                .build();
+            CONFIRM = new StyleBuilder()
+                .setBackgroundColorValue((int) holoGreenLight)
+                .build();
+            INFO = new StyleBuilder()
+                .setBackgroundColorValue((int) holoBlueLight)
+                .build();
+        }
 
         /** The text appearance resource id for the text. */
-        public int textAppearanceResId;
-
-        /** The padding for the crouton view content in pixels */
-        public int paddingInPixels;
-
-        /** The resource id for the padding for the view content */
-        public int paddingDimensionResId;
-
-        /** The file path and font name for the view content */
-        public String fontName;
-
-        /** The file path and font name resource id for the view content */
-        public int fontNameResId;
 
         public Style(StyleBuilder builder)
         {
-            this.configuration = builder.configuration;
-            this.backgroundColorResourceId = builder.backgroundColorResourceId;
-            this.backgroundDrawableResourceId = builder.backgroundDrawableResourceId;
-            this.isTileEnabled = builder.isTileEnabled;
-            this.textColorResourceId = builder.textColorResourceId;
-            this.textColorValue = builder.textColorValue;
-            this.heightInPixels = builder.heightInPixels;
-            this.heightDimensionResId = builder.heightDimensionResId;
-            this.widthInPixels = builder.widthInPixels;
-            this.widthDimensionResId = builder.widthDimensionResId;
-            this.gravity = builder.gravity;
-            this.imageDrawable = builder.imageDrawable;
-            this.textSize = builder.textSize;
-            this.textShadowColorResId = builder.textShadowColorResId;
-            this.textShadowRadius = builder.textShadowRadius;
-            this.textShadowDx = builder.textShadowDx;
-            this.textShadowDy = builder.textShadowDy;
-            this.textAppearanceResId = builder.textAppearanceResId;
-            this.imageResId = builder.imageResId;
-            this.imageScaleType = builder.imageScaleType;
-            this.paddingInPixels = builder.paddingInPixels;
-            this.paddingDimensionResId = builder.paddingDimensionResId;
-            this.backgroundColorValue = builder.backgroundColorValue;
-            this.fontName = builder.fontName;
-            this.fontNameResId = builder.fontNameResId;
+            configuration = builder.configuration;
+            backgroundColorResourceId = builder.backgroundColorResourceId;
+            backgroundDrawableResourceId = builder.backgroundDrawableResourceId;
+            isTileEnabled = builder.isTileEnabled;
+            textColorResourceId = builder.textColorResourceId;
+            textColorValue = builder.textColorValue;
+            heightInPixels = builder.heightInPixels;
+            heightDimensionResId = builder.heightDimensionResId;
+            widthInPixels = builder.widthInPixels;
+            widthDimensionResId = builder.widthDimensionResId;
+            gravity = builder.gravity;
+            imageDrawable = builder.imageDrawable;
+            textSize = builder.textSize;
+            textShadowColorResId = builder.textShadowColorResId;
+            textShadowRadius = builder.textShadowRadius;
+            textShadowDx = builder.textShadowDx;
+            textShadowDy = builder.textShadowDy;
+            textAppearanceResId = builder.textAppearanceResId;
+            imageResId = builder.imageResId;
+            imageScaleType = builder.imageScaleType;
+            paddingInPixels = builder.paddingInPixels;
+            paddingDimensionResId = builder.paddingDimensionResId;
+            backgroundColorValue = builder.backgroundColorValue;
+            fontName = builder.fontName;
+            fontNameResId = builder.fontNameResId;
         }
 
         public override String ToString()
         {
             return "Style{" +
-              "configuration=" + configuration +
-              ", backgroundColorResourceId=" + backgroundColorResourceId +
-              ", backgroundDrawableResourceId=" + backgroundDrawableResourceId +
-              ", backgroundColorValue=" + backgroundColorValue +
-              ", isTileEnabled=" + isTileEnabled +
-              ", textColorResourceId=" + textColorResourceId +
-              ", textColorValue=" + textColorValue +
-              ", heightInPixels=" + heightInPixels +
-              ", heightDimensionResId=" + heightDimensionResId +
-              ", widthInPixels=" + widthInPixels +
-              ", widthDimensionResId=" + widthDimensionResId +
-              ", gravity=" + gravity +
-              ", imageDrawable=" + imageDrawable +
-              ", imageResId=" + imageResId +
-              ", imageScaleType=" + imageScaleType +
-              ", textSize=" + textSize +
-              ", textShadowColorResId=" + textShadowColorResId +
-              ", textShadowRadius=" + textShadowRadius +
-              ", textShadowDy=" + textShadowDy +
-              ", textShadowDx=" + textShadowDx +
-              ", textAppearanceResId=" + textAppearanceResId +
-              ", paddingInPixels=" + paddingInPixels +
-              ", paddingDimensionResId=" + paddingDimensionResId +
-              ", fontName=" + fontName +
-              ", fontNameResId=" + fontNameResId +
-              '}';
+                   "configuration=" + configuration +
+                   ", backgroundColorResourceId=" + backgroundColorResourceId +
+                   ", backgroundDrawableResourceId=" + backgroundDrawableResourceId +
+                   ", backgroundColorValue=" + backgroundColorValue +
+                   ", isTileEnabled=" + isTileEnabled +
+                   ", textColorResourceId=" + textColorResourceId +
+                   ", textColorValue=" + textColorValue +
+                   ", heightInPixels=" + heightInPixels +
+                   ", heightDimensionResId=" + heightDimensionResId +
+                   ", widthInPixels=" + widthInPixels +
+                   ", widthDimensionResId=" + widthDimensionResId +
+                   ", gravity=" + gravity +
+                   ", imageDrawable=" + imageDrawable +
+                   ", imageResId=" + imageResId +
+                   ", imageScaleType=" + imageScaleType +
+                   ", textSize=" + textSize +
+                   ", textShadowColorResId=" + textShadowColorResId +
+                   ", textShadowRadius=" + textShadowRadius +
+                   ", textShadowDy=" + textShadowDy +
+                   ", textShadowDx=" + textShadowDx +
+                   ", textAppearanceResId=" + textAppearanceResId +
+                   ", paddingInPixels=" + paddingInPixels +
+                   ", paddingDimensionResId=" + paddingDimensionResId +
+                   ", fontName=" + fontName +
+                   ", fontNameResId=" + fontNameResId +
+                   '}';
         }
     }
-
 }

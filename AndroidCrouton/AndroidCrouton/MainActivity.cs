@@ -6,14 +6,13 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using CroutonLibrary;
 
 namespace AndroidCrouton
 {
-    [Activity(Label = "AndroidCrouton", MainLauncher = true, Icon = "@drawable/icon")]
-    public class Activity1 : Activity
+    [Activity(Label = "Crouton Sample", MainLauncher = true, Icon = "@drawable/icon")]
+    public class MainActivity : Activity
     {
-        int count = 1;
-
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -25,7 +24,10 @@ namespace AndroidCrouton
             // and attach an event to it
             Button button = FindViewById<Button>(Resource.Id.MyButton);
 
-            button.Click += delegate { button.Text = string.Format("{0} clicks!", count++); };
+            button.Click += delegate
+            {
+                Crouton.makeText(this, "Ana are mere", Style.INFO).show();
+            };
         }
     }
 }

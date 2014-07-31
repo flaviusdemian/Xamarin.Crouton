@@ -4,6 +4,7 @@ using Android.App;
 using Android.Content;
 using Android.Content.Res;
 using Android.OS;
+using Android.Test.Suitebuilder;
 using Android.Views;
 using Android.Views.Accessibility;
 using Android.Widget;
@@ -11,13 +12,14 @@ using Java.Interop;
 using Java.Lang;
 using Java.Util;
 using Java.Util.Concurrent;
+using String = Java.Lang.String;
 
 namespace CroutonLibrary
 {
 
-/**
- * Manages the lifecycle of {@link Crouton}s.
- */
+    /**
+     * Manages the lifecycle of {@link Crouton}s.
+     */
 
     public class Manager : Handler
     {
@@ -68,7 +70,7 @@ namespace CroutonLibrary
             }
 
             // First peek whether the Crouton has an activity.
-            Crouton currentCrouton = croutonQueue.Peek().JavaCast<Crouton>();
+            Crouton currentCrouton = JavaObjectExtensions.JavaCast<Crouton>(croutonQueue.Peek());
 
             // If the activity is null we poll the Crouton off the queue.
             if (null == currentCrouton.getActivity())
@@ -87,7 +89,7 @@ namespace CroutonLibrary
             }
             else
             {
-                sendMessageDelayed(currentCrouton, (int) Messages.DISPLAY_CROUTON,
+                sendMessageDelayed(currentCrouton, (int)Messages.DISPLAY_CROUTON,
                     calculateCroutonDuration(currentCrouton));
             }
         }
@@ -127,9 +129,9 @@ namespace CroutonLibrary
    *     The delay in milliseconds.
    */
 
-        private void sendMessageDelayed(Crouton crouton, uint messageId, long delay)
+        private void sendMessageDelayed(Crouton crouton, Int64 messageId, long delay)
         {
-            Message message = ObtainMessage((int) messageId);
+            Message message = ObtainMessage((int)messageId);
             message.Obj = crouton;
             SendMessageDelayed(message, delay);
         }
@@ -142,12 +144,12 @@ namespace CroutonLibrary
 
         public override void HandleMessage(Message message)
         {
-            Crouton crouton = (Crouton) message.Obj;
+            Crouton crouton = (Crouton)message.Obj;
             if (null == crouton)
             {
                 return;
             }
-            switch ((uint) message.What)
+            switch (message.What)
             {
                 case Messages.DISPLAY_CROUTON:
                     displayCrouton();
@@ -215,8 +217,8 @@ namespace CroutonLibrary
                     {
                         return;
                     }
-                    handleTranslucentActionBar((ViewGroup.MarginLayoutParams) parameters, activity);
-                    handleActionBarOverlay((ViewGroup.MarginLayoutParams) parameters, activity);
+                    handleTranslucentActionBar((ViewGroup.MarginLayoutParams)parameters, activity);
+                    handleActionBarOverlay((ViewGroup.MarginLayoutParams)parameters, activity);
 
                     activity.AddContentView(croutonView, parameters);
                 }
@@ -226,31 +228,30 @@ namespace CroutonLibrary
             ViewTreeObserver observer = croutonView.ViewTreeObserver;
             if (null != observer)
             {
-                //TOOD: FIX THIS
-                //observer.GlobalLayout +=
-                //observer.AddOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                //  //@Override
-                //  //@TargetApi(16)
-                //  public void onGlobalLayout() 
-                //  {
-                //    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                //      croutonView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                //    } 
-                //    else 
-                //    {
-                //      croutonView.ViewTreeObserver.RemoveGlobalOnLayoutListener(this);
-                //    }
 
-                //    if(crouton.getInAnimation() != null) {
-                //      croutonView.StartAnimation(crouton.getInAnimation());
-                //      announceForAccessibilityCompat(crouton.getActivity(), crouton.getText());
-                //      if (Configuration.DURATION_INFINITE != crouton.getConfiguration().durationInMilliseconds) {
-                //        sendMessageDelayed(crouton, Messages.REMOVE_CROUTON,
-                //            crouton.getConfiguration().durationInMilliseconds + crouton.getInAnimation().Duration);
-                //      }
-                //    }
-                //  }
-                //});
+                var layoutListener = new GlobalLayoutListener();
+                layoutListener.OnGlobalLayout(delegate
+                    {
+                        if (Build.VERSION.SdkInt < Build.VERSION_CODES.JellyBean)
+                        {
+                            croutonView.ViewTreeObserver.RemoveGlobalOnLayoutListener(layoutListener);
+                        }
+                        else
+                        {
+                            croutonView.ViewTreeObserver.RemoveOnGlobalLayoutListener(layoutListener);
+                        }
+
+                        if (crouton.getInAnimation() != null)
+                        {
+                            croutonView.StartAnimation(crouton.getInAnimation());
+                            announceForAccessibilityCompat(crouton.getActivity(), crouton.getText());
+                            if (Configuration.DURATION_INFINITE != crouton.getConfiguration().durationInMilliseconds)
+                            {
+                                sendMessageDelayed(crouton, Messages.REMOVE_CROUTON,
+                                    crouton.getConfiguration().durationInMilliseconds + crouton.getInAnimation().Duration);
+                            }
+                        }
+                    });
             }
         }
 
@@ -269,7 +270,7 @@ namespace CroutonLibrary
                 int flags = (int)activity.Window.Attributes.Flags;
                 int translucentStatusFlag = 0;
                 //TODO: FIX
-                //int translucentStatusFlag = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+                //int translucentStatusFlag = (int)  fl WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
                 if ((flags & translucentStatusFlag) == translucentStatusFlag)
                 {
                     setActionBarMargin(parameters, activity);
@@ -314,14 +315,14 @@ namespace CroutonLibrary
         public void removeCrouton(Crouton crouton)
         {
             View croutonView = crouton.getView();
-            ViewGroup croutonParentView = (ViewGroup) croutonView.Parent;
+            ViewGroup croutonParentView = (ViewGroup)croutonView.Parent;
 
             if (null != croutonParentView)
             {
                 croutonView.StartAnimation(crouton.getOutAnimation());
 
                 // Remove the Crouton from the queue.
-                Crouton removed = (Crouton) croutonQueue.Poll();
+                Crouton removed = (Crouton)croutonQueue.Poll();
 
                 // Remove the crouton from the view's parent.
                 croutonParentView.RemoveView(croutonView);
@@ -359,7 +360,7 @@ namespace CroutonLibrary
             // Crouton seems to be out of sync with reality!
             if (null != crouton.getActivity() && null != crouton.getView() && null != crouton.getView().Parent)
             {
-                ((ViewGroup) crouton.getView().Parent).RemoveView(crouton.getView());
+                ((ViewGroup)crouton.getView().Parent).RemoveView(crouton.getView());
 
                 // remove any messages pending for the crouton
                 removeAllMessagesForCrouton(crouton);
@@ -368,7 +369,7 @@ namespace CroutonLibrary
             IIterator croutonIterator = croutonQueue.Iterator();
             while (croutonIterator.HasNext == true)
             {
-                Crouton c = croutonIterator.Next().JavaCast<Crouton>();
+                Crouton c = JavaObjectExtensions.JavaCast<Crouton>(croutonIterator.Next());
                 if (c.Equals(crouton) && (null != c.getActivity()))
                 {
                     // remove the crouton from the content view
@@ -413,7 +414,7 @@ namespace CroutonLibrary
             IIterator croutonIterator = croutonQueue.Iterator();
             while (croutonIterator.HasNext == true)
             {
-                Crouton crouton = croutonIterator.Next().JavaCast<Crouton>();
+                Crouton crouton = JavaObjectExtensions.JavaCast<Crouton>(croutonIterator.Next());
                 if ((null != crouton.getActivity()) && crouton.getActivity().Equals(activity))
                 {
                     // remove the crouton from the content view
@@ -431,7 +432,7 @@ namespace CroutonLibrary
         {
             if (crouton.isShowing())
             {
-                ViewGroup parent = (ViewGroup) crouton.getView().Parent;
+                ViewGroup parent = (ViewGroup)crouton.getView().Parent;
                 if (null != parent)
                 {
                     parent.RemoveView(crouton.getView());
@@ -441,16 +442,16 @@ namespace CroutonLibrary
 
         private void removeAllMessages()
         {
-            RemoveMessages(Convert.ToInt32(Messages.ADD_CROUTON_TO_VIEW));
-            RemoveMessages(Convert.ToInt32(Messages.DISPLAY_CROUTON));
-            RemoveMessages(Convert.ToInt32(Messages.REMOVE_CROUTON));
+            RemoveMessages(Messages.ADD_CROUTON_TO_VIEW);
+            RemoveMessages(Messages.DISPLAY_CROUTON);
+            RemoveMessages(Messages.REMOVE_CROUTON);
         }
 
         private void removeAllMessagesForCrouton(Crouton crouton)
         {
-            RemoveMessages(Convert.ToInt32(Messages.ADD_CROUTON_TO_VIEW), crouton);
-            RemoveMessages(Convert.ToInt32(Messages.DISPLAY_CROUTON), crouton);
-            RemoveMessages(Convert.ToInt32(Messages.REMOVE_CROUTON), crouton);
+            RemoveMessages(Messages.ADD_CROUTON_TO_VIEW, crouton);
+            RemoveMessages(Messages.DISPLAY_CROUTON, crouton);
+            RemoveMessages(Messages.REMOVE_CROUTON, crouton);
         }
 
         /**
@@ -472,14 +473,14 @@ namespace CroutonLibrary
    *     The text to announce.
    */
 
-        public static void announceForAccessibilityCompat(Context context, ICharSequence text)
+        public static void announceForAccessibilityCompat(Context context, System.String text)
         {
-            if ((int) Build.VERSION.SdkInt >= 4)
+            if ((int)Build.VERSION.SdkInt >= 4)
             {
                 AccessibilityManager accessibilityManager = null;
                 if (null != context)
                 {
-                    accessibilityManager = (AccessibilityManager) context.GetSystemService(Context.AccessibilityService);
+                    accessibilityManager = (AccessibilityManager)context.GetSystemService(Context.AccessibilityService);
                 }
                 if (null == accessibilityManager || !accessibilityManager.IsEnabled)
                 {
@@ -490,7 +491,7 @@ namespace CroutonLibrary
                 // events. Jelly Bean (SDK 16) added support for speaking text verbatim
                 // using the ANNOUNCEMENT event type.
                 EventTypes eventType;
-                if ((int) Build.VERSION.SdkInt < 16)
+                if ((int)Build.VERSION.SdkInt < 16)
                 {
                     eventType = EventTypes.ViewFocused;
                 }
@@ -502,7 +503,8 @@ namespace CroutonLibrary
                 // Construct an accessibility event with the minimum recommended
                 // attributes. An event without a class name or package may be dropped.
                 AccessibilityEvent ev = AccessibilityEvent.Obtain(eventType);
-                ev.Text.Add(text);
+                Java.Lang.String textProxy = new Java.Lang.String(text);
+                ev.Text.Add(textProxy);
                 ev.ClassName = INSTANCE.GetType().ToString();
                 ev.PackageName = context.PackageName;
 
