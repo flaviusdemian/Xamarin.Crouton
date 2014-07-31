@@ -26,7 +26,14 @@ namespace AndroidCrouton
 
             button.Click += delegate
             {
+                try
+                { 
                 Crouton.makeText(this, "Ana are mere", Style.INFO).show();
+                }
+                catch (Exception ex)
+                {
+                    ex.ToString();
+                }
             };
         }
     }

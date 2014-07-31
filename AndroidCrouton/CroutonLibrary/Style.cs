@@ -1,4 +1,5 @@
 using System;
+using Android.Content;
 using Android.Graphics.Drawables;
 using Android.Widget;
 
@@ -28,9 +29,6 @@ namespace CroutonLibrary
     public class Style
     {
         public static int NOT_SET = -1;
-        public static uint holoRedLight = 0xffff4444;
-        public static uint holoGreenLight = 0xff99cc00;
-        public static uint holoBlueLight = 0xff33b5e5;
 
         /** Default style for alerting the user. */
         public static Style ALERT;
@@ -114,15 +112,16 @@ namespace CroutonLibrary
 
         static Style()
         {
-            ALERT = new StyleBuilder()
-                .setBackgroundColorValue((int) holoRedLight)
-                .build();
-            CONFIRM = new StyleBuilder()
-                .setBackgroundColorValue((int) holoGreenLight)
-                .build();
-            INFO = new StyleBuilder()
-                .setBackgroundColorValue((int) holoBlueLight)
-                .build();
+            try
+            {
+                ALERT = new StyleBuilder().setBackgroundColor(Resource.Color.red).build();
+                CONFIRM = new StyleBuilder().setBackgroundColorValue(Resource.Color.green).build();
+                INFO = new StyleBuilder().setBackgroundColorValue(Resource.Color.holo_blue_light).build();
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+            }
         }
 
         /** The text appearance resource id for the text. */

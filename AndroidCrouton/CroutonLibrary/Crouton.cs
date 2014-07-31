@@ -223,7 +223,6 @@ namespace CroutonLibrary
          */
         public static Crouton makeText(Activity activity, int textResourceId, Style style)
         {
-            //TODO: fix this
             return makeText(activity, activity.GetString(textResourceId), style);
         }
 
@@ -866,11 +865,16 @@ namespace CroutonLibrary
             croutonView.LayoutParameters = new FrameLayout.LayoutParams(width != 0 ? width : FrameLayout.LayoutParams.MatchParent, height);
 
             // set background
-            //if (this.style.backgroundColorValue != Style.NOT_SET)
-            //{
-            //    //TODO: FIX
-            //    //croutonView.SetBackgroundColor(resources.GetColor(this.style.backgroundColorValue));
-            //    croutonView.SetBackgroundColor(resources.GetColor(this.style.backgroundColorResourceId));
+            if (this.style.backgroundColorValue != Style.NOT_SET)
+            {
+            }
+            else
+            {
+                
+            }
+            //TODO: FIX
+            //croutonView.SetBackgroundColor(resources.GetColor(this.style.backgroundColorValue));
+            croutonView.SetBackgroundColor(new Color(230, 21, 21)); //red
             //}
             //else
             //{
@@ -961,10 +965,18 @@ namespace CroutonLibrary
             text.Gravity = (GravityFlags)this.style.gravity;
 
             // set the text color if set
-            //if (this.style.textColorValue != Style.NOT_SET)
+            if (this.style.textColorValue != Style.NOT_SET)
+            {
+
+            }
+            else
+            {
+                
+            }
             //{
             //    //TODO: FIX
             //    //text.SetTextColor(resources.GetColor(this.style.textColorValue));
+            croutonView.SetBackgroundColor(new Color(97, 225, 32)); //green
             //}
             //else if (this.style.textColorResourceId != 0)
             //{
