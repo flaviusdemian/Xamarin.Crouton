@@ -87,7 +87,7 @@ namespace AndroidCrouton
                     {
                         if (infiniteCrouton != null)
                         {
-                            Crouton.hide(infiniteCrouton);
+                            Crouton.Hide(infiniteCrouton);
                             infiniteCrouton = null;
                         }
                         break;
@@ -200,11 +200,11 @@ namespace AndroidCrouton
             Crouton crouton;
             if (displayOnTop.Checked)
             {
-                crouton = Crouton.make(this, view);
+                crouton = Crouton.Make(this, view);
             }
             else
             {
-                crouton = Crouton.make(this, view, Resource.Id.alternate_view_group);
+                crouton = Crouton.Make(this, view, Resource.Id.alternate_view_group);
             }
             crouton.Show();
         }
@@ -226,11 +226,11 @@ namespace AndroidCrouton
             Crouton crouton;
             if (displayOnTop.Checked)
             {
-                crouton = Crouton.makeText(this, croutonText, croutonStyle);
+                crouton = Crouton.MakeText(this, croutonText, croutonStyle);
             }
             else
             {
-                crouton = Crouton.makeText(this, croutonText, croutonStyle, Resource.Id.alternate_view_group);
+                crouton = Crouton.MakeText(this, croutonText, croutonStyle, Resource.Id.alternate_view_group);
             }
             if (infinite)
             {

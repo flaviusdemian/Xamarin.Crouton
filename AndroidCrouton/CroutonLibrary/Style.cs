@@ -42,12 +42,12 @@ namespace CroutonLibrary
          * <p/>
          * 0 for no backgroundResourceId.
          */
-        public int backgroundColorResourceId;
+        public int BackgroundColorResourceId;
 
         /**
-         * The resource id of the backgroundDrawableResourceId.
+         * The resource id of the BackgroundDrawableResourceId.
          * <p/>
-         * 0 for no backgroundDrawableResourceId.
+         * 0 for no BackgroundDrawableResourceId.
          */
 
         /**
@@ -55,41 +55,41 @@ namespace CroutonLibrary
          * <p/>
          * NOT_SET for no value.
          */
-        public int backgroundColorValue;
-        public int backgroundDrawableResourceId;
-        public Configuration configuration;
-        public String fontName;
+        public int BackgroundColorValue;
+        public int BackgroundDrawableResourceId;
+        public Configuration Configuration;
+        public String FontName;
 
         /** The file path and font name resource id for the view content */
-        public int fontNameResId;
+        public int FontNameResId;
 
-        /** Whether we should isTileEnabled the backgroundResourceId or not. */
+        /** Whether we should IsTileEnabled the backgroundResourceId or not. */
 
-        /** The text's gravity as provided by {@link Gravity}. */
-        public int gravity;
-        public int heightDimensionResId;
-        public int heightInPixels;
-
-        /** An additional image to display in the {@link Crouton}. */
-        public Drawable imageDrawable;
+        /** The text's Gravity as provided by {@link Gravity}. */
+        public int Gravity;
+        public int HeightDimensionResId;
+        public int HeightInPixels;
 
         /** An additional image to display in the {@link Crouton}. */
-        public int imageResId;
+        public Drawable ImageDrawable;
+
+        /** An additional image to display in the {@link Crouton}. */
+        public int ImageResId;
 
         /** The {@link ImageView.ScaleType} for the image to display in the {@link Crouton}. */
-        public ImageView.ScaleType imageScaleType;
-        public bool isTileEnabled;
-        public int paddingDimensionResId;
-        public int paddingInPixels;
-        public int textAppearanceResId;
-        public int textColorResourceId;
+        public ImageView.ScaleType ImageScaleType;
+        public bool IsTileEnabled;
+        public int PaddingDimensionResId;
+        public int PaddingInPixels;
+        public int TextAppearanceResId;
+        public int TextColorResourceId;
 
         /**
          * The textColorResourceValue's e.g. 0xffff4444;
          * <p/>
          * NOT_SET for no value.
          */
-        public int textColorValue;
+        public int TextColorValue;
 
         /**
          * The text size in sp
@@ -98,17 +98,17 @@ namespace CroutonLibrary
          */
 
         /** The text shadow color's resource id */
-        public int textShadowColorResId;
+        public int TextShadowColorResId;
 
         /** The text shadow radius */
 
         /** The text shadow horizontal offset */
-        public float textShadowDx;
-        public float textShadowDy;
-        public float textShadowRadius;
-        public int textSize;
-        public int widthDimensionResId;
-        public int widthInPixels;
+        public float TextShadowDx;
+        public float TextShadowDy;
+        public float TextShadowRadius;
+        public int TextSize;
+        public int WidthDimensionResId;
+        public int WidthInPixels;
 
         static Style()
         {
@@ -121,61 +121,61 @@ namespace CroutonLibrary
 
         public Style(StyleBuilder builder)
         {
-            configuration = builder.configuration;
-            backgroundColorResourceId = builder.backgroundColorResourceId;
-            backgroundDrawableResourceId = builder.backgroundDrawableResourceId;
-            isTileEnabled = builder.isTileEnabled;
-            textColorResourceId = builder.textColorResourceId;
-            textColorValue = builder.textColorValue;
-            heightInPixels = builder.heightInPixels;
-            heightDimensionResId = builder.heightDimensionResId;
-            widthInPixels = builder.widthInPixels;
-            widthDimensionResId = builder.widthDimensionResId;
-            gravity = builder.gravity;
-            imageDrawable = builder.imageDrawable;
-            textSize = builder.textSize;
-            textShadowColorResId = builder.textShadowColorResId;
-            textShadowRadius = builder.textShadowRadius;
-            textShadowDx = builder.textShadowDx;
-            textShadowDy = builder.textShadowDy;
-            textAppearanceResId = builder.textAppearanceResId;
-            imageResId = builder.imageResId;
-            imageScaleType = builder.imageScaleType;
-            paddingInPixels = builder.paddingInPixels;
-            paddingDimensionResId = builder.paddingDimensionResId;
-            backgroundColorValue = builder.backgroundColorValue;
-            fontName = builder.fontName;
-            fontNameResId = builder.fontNameResId;
+            Configuration = builder.Configuration;
+            BackgroundColorResourceId = builder.BackgroundColorResourceId;
+            BackgroundDrawableResourceId = builder.BackgroundDrawableResourceId;
+            IsTileEnabled = builder.IsTileEnabled;
+            TextColorResourceId = builder.TextColorResourceId;
+            TextColorValue = builder.TextColorValue;
+            HeightInPixels = builder.HeightInPixels;
+            HeightDimensionResId = builder.HeightDimensionResId;
+            WidthInPixels = builder.WidthInPixels;
+            WidthDimensionResId = builder.WidthDimensionResId;
+            Gravity = builder.Gravity;
+            ImageDrawable = builder.ImageDrawable;
+            TextSize = builder.TextSize;
+            TextShadowColorResId = builder.TextShadowColorResId;
+            TextShadowRadius = builder.TextShadowRadius;
+            TextShadowDx = builder.TextShadowDx;
+            TextShadowDy = builder.TextShadowDy;
+            TextAppearanceResId = builder.TextAppearanceResId;
+            ImageResId = builder.ImageResId;
+            ImageScaleType = builder.ImageScaleType;
+            PaddingInPixels = builder.PaddingInPixels;
+            PaddingDimensionResId = builder.PaddingDimensionResId;
+            BackgroundColorValue = builder.BackgroundColorValue;
+            FontName = builder.FontName;
+            FontNameResId = builder.FontNameResId;
         }
 
         public override String ToString()
         {
             return "Style{" +
-                   "configuration=" + configuration +
-                   ", backgroundColorResourceId=" + backgroundColorResourceId +
-                   ", backgroundDrawableResourceId=" + backgroundDrawableResourceId +
-                   ", backgroundColorValue=" + backgroundColorValue +
-                   ", isTileEnabled=" + isTileEnabled +
-                   ", textColorResourceId=" + textColorResourceId +
-                   ", textColorValue=" + textColorValue +
-                   ", heightInPixels=" + heightInPixels +
-                   ", heightDimensionResId=" + heightDimensionResId +
-                   ", widthInPixels=" + widthInPixels +
-                   ", widthDimensionResId=" + widthDimensionResId +
-                   ", gravity=" + gravity +
-                   ", imageDrawable=" + imageDrawable +
-                   ", imageResId=" + imageResId +
-                   ", imageScaleType=" + imageScaleType +
-                   ", textSize=" + textSize +
-                   ", textShadowColorResId=" + textShadowColorResId +
-                   ", textShadowRadius=" + textShadowRadius +
-                   ", textShadowDy=" + textShadowDy +
-                   ", textShadowDx=" + textShadowDx +
-                   ", textAppearanceResId=" + textAppearanceResId +
-                   ", paddingInPixels=" + paddingInPixels +
-                   ", paddingDimensionResId=" + paddingDimensionResId +
-                   ", fontName=" + fontName +
-                   ", fontNameResId=" + fontNameResId +
+                   "Configuration=" + Configuration +
+                   ", BackgroundColorResourceId=" + BackgroundColorResourceId +
+                   ", BackgroundDrawableResourceId=" + BackgroundDrawableResourceId +
+                   ", BackgroundColorValue=" + BackgroundColorValue +
+                   ", IsTileEnabled=" + IsTileEnabled +
+                   ", TextColorResourceId=" + TextColorResourceId +
+                   ", TextColorValue=" + TextColorValue +
+                   ", HeightInPixels=" + HeightInPixels +
+                   ", HeightDimensionResId=" + HeightDimensionResId +
+                   ", WidthInPixels=" + WidthInPixels +
+                   ", WidthDimensionResId=" + WidthDimensionResId +
+                   ", Gravity=" + Gravity +
+                   ", ImageDrawable=" + ImageDrawable +
+                   ", ImageResId=" + ImageResId +
+                   ", ImageScaleType=" + ImageScaleType +
+                   ", TextSize=" + TextSize +
+                   ", TextShadowColorResId=" + TextShadowColorResId +
+                   ", TextShadowRadius=" + TextShadowRadius +
+                   ", TextShadowDy=" + TextShadowDy +
+                   ", TextShadowDx=" + TextShadowDx +
+                   ", TextAppearanceResId=" + TextAppearanceResId +
+                   ", PaddingInPixels=" + PaddingInPixels +
+                   ", PaddingDimensionResId=" + PaddingDimensionResId +
+                   ", FontName=" + FontName +
+                   ", FontNameResId=" + FontNameResId +
                    '}';
         }
     }

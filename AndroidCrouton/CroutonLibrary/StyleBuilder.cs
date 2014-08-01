@@ -1,67 +1,60 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.Graphics.Drawables;
-using Android.OS;
-using Android.Runtime;
 //using Android.Views;
+using System;
+using Android.Graphics.Drawables;
 using Android.Views;
 using Android.Widget;
 
 namespace CroutonLibrary
 {
-
     /** Builder for the {@link Style} object. */
+
     public class StyleBuilder
     {
-        public Configuration configuration;
-        public int backgroundColorValue;
-        public int backgroundColorResourceId;
-        public int backgroundDrawableResourceId;
-        public bool isTileEnabled;
-        public int textColorResourceId;
-        public int textColorValue;
-        public int heightInPixels;
-        public int heightDimensionResId;
-        public int widthInPixels;
-        public int widthDimensionResId;
-        public int gravity;
-        public Drawable imageDrawable;
-        public int textSize;
-        public int textShadowColorResId;
-        public float textShadowRadius;
-        public float textShadowDx;
-        public float textShadowDy;
-        public int textAppearanceResId;
-        public int imageResId;
-        public ImageView.ScaleType imageScaleType;
-        public int paddingInPixels;
-        public int paddingDimensionResId;
-        public String fontName;
-        public int fontNameResId; 
+        public int BackgroundColorResourceId;
+        public int BackgroundColorValue;
+        public int BackgroundDrawableResourceId;
+        public Configuration Configuration;
+        public String FontName;
+        public int FontNameResId;
+        public int Gravity;
+        public int HeightDimensionResId;
+        public int HeightInPixels;
+        public Drawable ImageDrawable;
+        public int ImageResId;
+        public ImageView.ScaleType ImageScaleType;
+        public bool IsTileEnabled;
+        public int PaddingDimensionResId;
+        public int PaddingInPixels;
+        public int TextAppearanceResId;
+        public int TextColorResourceId;
+        public int TextColorValue;
+        public int TextShadowColorResId;
+        public float TextShadowDx;
+        public float TextShadowDy;
+        public float TextShadowRadius;
+        public int TextSize;
+        public int WidthDimensionResId;
+        public int WidthInPixels;
         /** Creates a {@link Builder} to build a {@link Style} upon. */
+
         public StyleBuilder()
         {
-            configuration = Configuration.DEFAULT;
-            paddingInPixels = 10;
-            backgroundColorResourceId = Resource.Color.holo_blue_light;
-            backgroundDrawableResourceId = 0;
-            backgroundColorValue = Style.NOT_SET;
-            isTileEnabled = false;
-            textColorResourceId = Resource.Color.white;
-            textColorValue = Style.NOT_SET;
-            heightInPixels = ViewGroup.LayoutParams.WrapContent;
-            widthInPixels = ViewGroup.LayoutParams.MatchParent;
-            gravity = (int)GravityFlags.Center;
-            imageDrawable = null;
-            imageResId = 0;
-            imageScaleType = ImageView.ScaleType.FitXy;
-            fontName = null;
-            fontNameResId = 0;
+            Configuration = Configuration.DEFAULT;
+            PaddingInPixels = 10;
+            BackgroundColorResourceId = Resource.Color.holo_blue_light;
+            BackgroundDrawableResourceId = 0;
+            BackgroundColorValue = Style.NOT_SET;
+            IsTileEnabled = false;
+            TextColorResourceId = Resource.Color.white;
+            TextColorValue = Style.NOT_SET;
+            HeightInPixels = ViewGroup.LayoutParams.WrapContent;
+            WidthInPixels = ViewGroup.LayoutParams.MatchParent;
+            Gravity = (int) GravityFlags.Center;
+            ImageDrawable = null;
+            ImageResId = 0;
+            ImageScaleType = ImageView.ScaleType.FitXy;
+            FontName = null;
+            FontNameResId = 0;
         }
 
         /**
@@ -70,92 +63,98 @@ namespace CroutonLibrary
          * @param baseStyle
          *   The base {@link Style} to use for this {@link Style}.
          */
+
         public StyleBuilder(Style baseStyle)
         {
-            configuration = baseStyle.configuration;
-            backgroundColorValue = baseStyle.backgroundColorValue;
-            backgroundColorResourceId = baseStyle.backgroundColorResourceId;
-            backgroundDrawableResourceId = baseStyle.backgroundDrawableResourceId;
-            isTileEnabled = baseStyle.isTileEnabled;
-            textColorResourceId = baseStyle.textColorResourceId;
-            textColorValue = baseStyle.textColorValue;
-            heightInPixels = baseStyle.heightInPixels;
-            heightDimensionResId = baseStyle.heightDimensionResId;
-            widthInPixels = baseStyle.widthInPixels;
-            widthDimensionResId = baseStyle.widthDimensionResId;
-            gravity = baseStyle.gravity;
-            imageDrawable = baseStyle.imageDrawable;
-            textSize = baseStyle.textSize;
-            textShadowColorResId = baseStyle.textShadowColorResId;
-            textShadowRadius = baseStyle.textShadowRadius;
-            textShadowDx = baseStyle.textShadowDx;
-            textShadowDy = baseStyle.textShadowDy;
-            textAppearanceResId = baseStyle.textAppearanceResId;
-            imageResId = baseStyle.imageResId;
-            imageScaleType = baseStyle.imageScaleType;
-            paddingInPixels = baseStyle.paddingInPixels;
-            paddingDimensionResId = baseStyle.paddingDimensionResId;
-            fontName = baseStyle.fontName;
-            fontNameResId = baseStyle.fontNameResId;
+            Configuration = baseStyle.Configuration;
+            BackgroundColorValue = baseStyle.BackgroundColorValue;
+            BackgroundColorResourceId = baseStyle.BackgroundColorResourceId;
+            BackgroundDrawableResourceId = baseStyle.BackgroundDrawableResourceId;
+            IsTileEnabled = baseStyle.IsTileEnabled;
+            TextColorResourceId = baseStyle.TextColorResourceId;
+            TextColorValue = baseStyle.TextColorValue;
+            HeightInPixels = baseStyle.HeightInPixels;
+            HeightDimensionResId = baseStyle.HeightDimensionResId;
+            WidthInPixels = baseStyle.WidthInPixels;
+            WidthDimensionResId = baseStyle.WidthDimensionResId;
+            Gravity = baseStyle.Gravity;
+            ImageDrawable = baseStyle.ImageDrawable;
+            TextSize = baseStyle.TextSize;
+            TextShadowColorResId = baseStyle.TextShadowColorResId;
+            TextShadowRadius = baseStyle.TextShadowRadius;
+            TextShadowDx = baseStyle.TextShadowDx;
+            TextShadowDy = baseStyle.TextShadowDy;
+            TextAppearanceResId = baseStyle.TextAppearanceResId;
+            ImageResId = baseStyle.ImageResId;
+            ImageScaleType = baseStyle.ImageScaleType;
+            PaddingInPixels = baseStyle.PaddingInPixels;
+            PaddingDimensionResId = baseStyle.PaddingDimensionResId;
+            FontName = baseStyle.FontName;
+            FontNameResId = baseStyle.FontNameResId;
         }
+
         /**
          * Set the {@link Configuration} option of the {@link Crouton}.
          *
-         * @param configuration
+         * @param Configuration
          *   The {@link Configuration}.
          *
          * @return the {@link Builder}.
          */
+
         public StyleBuilder SetConfiguration(Configuration configuration)
         {
-            this.configuration = configuration;
+            Configuration = configuration;
             return this;
         }
 
         /**
-         * Set the backgroundColorResourceId option of the {@link Crouton}.
+         * Set the BackgroundColorResourceId option of the {@link Crouton}.
          *
-         * @param backgroundColorResourceId
-         *   The backgroundColorResourceId's resource id.
+         * @param BackgroundColorResourceId
+         *   The BackgroundColorResourceId's resource id.
          *
          * @return the {@link Builder}.
          */
+
         public StyleBuilder SetBackgroundColor(int backgroundColorResourceId)
         {
-            this.backgroundColorResourceId = backgroundColorResourceId;
+            BackgroundColorResourceId = backgroundColorResourceId;
             return this;
         }
 
         /**
          * Set the backgroundColorResourceValue option of the {@link Crouton}.
          *
-         * @param backgroundColorValue
+         * @param BackgroundColorValue
          *   The backgroundColorResourceValue's e.g. 0xffff4444;
          *
          * @return the {@link Builder}.
          */
+
         public StyleBuilder SetBackgroundColorValue(int backgroundColorValue)
         {
-            this.backgroundColorValue = backgroundColorValue;
+            BackgroundColorValue = backgroundColorValue;
             return this;
         }
 
         /**
-         * Set the backgroundDrawableResourceId option for the {@link Crouton}.
+         * Set the BackgroundDrawableResourceId option for the {@link Crouton}.
          *
-         * @param backgroundDrawableResourceId
-         *   Resource ID of a backgroundDrawableResourceId image drawable.
+         * @param BackgroundDrawableResourceId
+         *   Resource ID of a BackgroundDrawableResourceId image drawable.
          *
          * @return the {@link Builder}.
          */
+
         public StyleBuilder SetBackgroundDrawable(int backgroundDrawableResourceId)
         {
-            this.backgroundDrawableResourceId = backgroundDrawableResourceId;
+            BackgroundDrawableResourceId = backgroundDrawableResourceId;
             return this;
         }
 
         /**
-         * Set the heightInPixels option for the {@link Crouton}.
+         * Set the HeightInPixels option for the {@link Crouton}.
          *
          * @param height
          *   The height of the {@link Crouton} in pixel. Can also be
@@ -164,28 +163,30 @@ namespace CroutonLibrary
          *
          * @return the {@link Builder}.
          */
+
         public StyleBuilder SetHeight(int height)
         {
-            this.heightInPixels = height;
+            HeightInPixels = height;
             return this;
         }
 
         /**
          * Set the resource id for the height option for the {@link Crouton}.
          *
-         * @param heightDimensionResId
+         * @param HeightDimensionResId
          *   Resource ID of a dimension for the height of the {@link Crouton}.
          *
          * @return the {@link Builder}.
          */
+
         public StyleBuilder SetHeightDimensionResId(int heightDimensionResId)
         {
-            this.heightDimensionResId = heightDimensionResId;
+            HeightDimensionResId = heightDimensionResId;
             return this;
         }
 
         /**
-         * Set the widthInPixels option for the {@link Crouton}.
+         * Set the WidthInPixels option for the {@link Crouton}.
          *
          * @param width
          *   The width of the {@link Crouton} in pixel. Can also be
@@ -194,189 +195,209 @@ namespace CroutonLibrary
          *
          * @return the {@link Builder}.
          */
+
         public StyleBuilder SetWidth(int width)
         {
-            this.widthInPixels = width;
+            WidthInPixels = width;
             return this;
         }
 
         /**
          * Set the resource id for the width option for the {@link Crouton}.
          *
-         * @param widthDimensionResId
+         * @param WidthDimensionResId
          *   Resource ID of a dimension for the width of the {@link Crouton}.
          *
          * @return the {@link Builder}.
          */
+
         public StyleBuilder SetWidthDimensionResId(int widthDimensionResId)
         {
-            this.widthDimensionResId = widthDimensionResId;
+            WidthDimensionResId = widthDimensionResId;
             return this;
         }
 
         /**
-         * Set the isTileEnabled option for the {@link Crouton}.
+         * Set the IsTileEnabled option for the {@link Crouton}.
          *
-         * @param isTileEnabled
+         * @param IsTileEnabled
          *   <code>true</code> if you want the backgroundResourceId to be
          *   tiled, else <code>false</code>.
          *
          * @return the {@link Builder}.
          */
+
         public StyleBuilder SetTileEnabled(bool isTileEnabled)
         {
-            this.isTileEnabled = isTileEnabled;
+            IsTileEnabled = isTileEnabled;
             return this;
         }
 
         /**
-         * Set the textColorResourceId option for the {@link Crouton}.
+         * Set the TextColorResourceId option for the {@link Crouton}.
          *
          * @param textColor
          *   The resource id of the text colorResourceId.
          *
          * @return the {@link Builder}.
          */
+
         public StyleBuilder SetTextColor(int textColor)
         {
-            this.textColorResourceId = textColor;
+            TextColorResourceId = textColor;
             return this;
         }
 
         /**
          * Set the textColorResourceValue option of the {@link Crouton}.
          *
-         * @param textColorValue
+         * @param TextColorValue
          *   The textColorResourceValue's e.g. 0xffff4444;
          *
          * @return the {@link Builder}.
          */
+
         public StyleBuilder SetTextColorValue(int textColorValue)
         {
-            this.textColorValue = textColorValue;
+            TextColorValue = textColorValue;
             return this;
         }
 
         /**
-         * Set the gravity option for the {@link Crouton}.
+         * Set the Gravity option for the {@link Crouton}.
          *
-         * @param gravity
-         *   The text's gravity as provided by {@link Gravity}.
+         * @param Gravity
+         *   The text's Gravity as provided by {@link Gravity}.
          *
          * @return the {@link Builder}.
          */
+
         public StyleBuilder SetGravity(int gravity)
         {
-            this.gravity = gravity;
+            Gravity = gravity;
             return this;
         }
 
         /**
          * Set the image option for the {@link Crouton}.
          *
-         * @param imageDrawable
+         * @param ImageDrawable
          *   An additional image to display in the {@link Crouton}.
          *
          * @return the {@link Builder}.
          */
+
         public StyleBuilder SetImageDrawable(Drawable imageDrawable)
         {
-            this.imageDrawable = imageDrawable;
+            ImageDrawable = imageDrawable;
             return this;
         }
 
         /**
          * Set the image resource option for the {@link Crouton}.
          *
-         * @param imageResId
+         * @param ImageResId
          *   An additional image to display in the {@link Crouton}.
          *
          * @return the {@link Builder}.
          */
+
         public StyleBuilder SetImageResource(int imageResId)
         {
-            this.imageResId = imageResId;
+            ImageResId = imageResId;
             return this;
         }
 
         /** The text size in sp. */
+
         public StyleBuilder SetTextSize(int textSize)
         {
-            this.textSize = textSize;
+            TextSize = textSize;
             return this;
         }
 
         /** The text shadow color resource id. */
+
         public StyleBuilder SetTextShadowColor(int textShadowColorResId)
         {
-            this.textShadowColorResId = textShadowColorResId;
+            TextShadowColorResId = textShadowColorResId;
             return this;
         }
 
         /** The text shadow radius. */
+
         public StyleBuilder SetTextShadowRadius(float textShadowRadius)
         {
-            this.textShadowRadius = textShadowRadius;
+            TextShadowRadius = textShadowRadius;
             return this;
         }
 
         /** The text shadow horizontal offset. */
+
         public StyleBuilder SetTextShadowDx(float textShadowDx)
         {
-            this.textShadowDx = textShadowDx;
+            TextShadowDx = textShadowDx;
             return this;
         }
 
         /** The text shadow vertical offset. */
+
         public StyleBuilder SetTextShadowDy(float textShadowDy)
         {
-            this.textShadowDy = textShadowDy;
+            TextShadowDy = textShadowDy;
             return this;
         }
 
         /** The text appearance resource id for the text. */
+
         public StyleBuilder SetTextAppearance(int textAppearanceResId)
         {
-            this.textAppearanceResId = textAppearanceResId;
+            TextAppearanceResId = textAppearanceResId;
             return this;
         }
 
         /** The {@link android.widget.ImageView.ScaleType} for the image. */
+
         public StyleBuilder SetImageScaleType(ImageView.ScaleType imageScaleType)
         {
-            this.imageScaleType = imageScaleType;
+            ImageScaleType = imageScaleType;
             return this;
         }
 
         /** The padding for the crouton view's content in pixels. */
+
         public StyleBuilder SetPaddingInPixels(int padding)
         {
-            this.paddingInPixels = padding;
+            PaddingInPixels = padding;
             return this;
         }
 
         /** The resource id for the padding for the crouton view's content. */
+
         public StyleBuilder SetPaddingDimensionResId(int paddingResId)
         {
-            this.paddingDimensionResId = paddingResId;
+            PaddingDimensionResId = paddingResId;
             return this;
         }
 
         /** The file path and name of the font for the crouton view's content. */
+
         public StyleBuilder SetFontName(String fontName)
         {
-            this.fontName = fontName;
+            FontName = fontName;
             return this;
         }
 
         /** The resource id for the file path and name of the font for the crouton view's content. */
+
         public StyleBuilder SetFontNameResId(int fontNameResId)
         {
-            this.fontNameResId = fontNameResId;
+            FontNameResId = fontNameResId;
             return this;
         }
 
         /** @return a configured {@link Style} object. */
+
         public Style Build()
         {
             return new Style(this);

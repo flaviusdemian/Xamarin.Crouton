@@ -6,7 +6,7 @@ namespace CroutonLibrary
     {
         /**
          * Display a {@link Crouton} for an infinite amount of time or
-         * until {@link de.keyboardsurfer.android.widget.crouton.Crouton#cancel()} has been called.
+         * until {@link de.keyboardsurfer.android.widget.crouton.Crouton#Cancel()} has been called.
          */
         public static int DURATION_INFINITE = -1;
         /** The default long display duration of a {@link Crouton}. */
@@ -16,12 +16,12 @@ namespace CroutonLibrary
         /** The default {@link Configuration} of a {@link Crouton}. */
         public static Configuration DEFAULT;
 
-        /** The durationInMilliseconds the {@link Crouton} will be displayed in milliseconds. */
-        public readonly int durationInMilliseconds;
+        /** The DurationInMilliseconds the {@link Crouton} will be displayed in milliseconds. */
+        public readonly int DurationInMilliseconds;
         /** The resource id for the in animation. */
-        public readonly int inAnimationResId;
+        public readonly int InAnimationResId;
         /** The resource id for the out animation. */
-        public readonly int outAnimationResId;
+        public readonly int OutAnimationResId;
 
         static Configuration()
         {
@@ -30,17 +30,17 @@ namespace CroutonLibrary
 
         public Configuration(ConfigurationBuilder builder)
         {
-            durationInMilliseconds = builder.durationInMilliseconds;
-            inAnimationResId = builder.inAnimationResId;
-            outAnimationResId = builder.outAnimationResId;
+            DurationInMilliseconds = builder.DurationInMilliseconds;
+            InAnimationResId = builder.InAnimationResId;
+            OutAnimationResId = builder.OutAnimationResId;
         }
 
         public override String ToString()
         {
             return "Configuration{" +
-                   "durationInMilliseconds=" + durationInMilliseconds +
-                   ", inAnimationResId=" + inAnimationResId +
-                   ", outAnimationResId=" + outAnimationResId +
+                   "DurationInMilliseconds=" + DurationInMilliseconds +
+                   ", InAnimationResId=" + InAnimationResId +
+                   ", OutAnimationResId=" + OutAnimationResId +
                    '}';
         }
     }

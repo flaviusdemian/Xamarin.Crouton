@@ -28,7 +28,7 @@ namespace AndroidCrouton
             {
                 try
                 { 
-                Crouton.makeText(this, "Ana are mere", Style.INFO).Show();
+                Crouton.MakeText(this, "Ana are mere", Style.INFO).Show();
                 }
                 catch (Exception ex)
                 {

@@ -6,8 +6,8 @@ namespace CroutonLibrary
     public class DefaultAnimationsBuilder
     {
         private static long DURATION = 400;
-        private static Animation slideInDownAnimation, slideOutUpAnimation;
-        private static int lastInAnimationHeight, lastOutAnimationHeight;
+        private static Animation SlideInDownAnimation, SlideOutUpAnimation;
+        private static int LastInAnimationHeight, LastOutAnimationHeight;
 
         private DefaultAnimationsBuilder()
         {
@@ -21,18 +21,18 @@ namespace CroutonLibrary
    * @return The default Animation for a showing {@link Crouton}.
    */
 
-        public static Animation buildDefaultSlideInDownAnimation(View croutonView)
+        public static Animation BuildDefaultSlideInDownAnimation(View croutonView)
         {
-            if (!areLastMeasuredInAnimationHeightAndCurrentEqual(croutonView) || (null == slideInDownAnimation))
+            if (!AreLastMeasuredInAnimationHeightAndCurrentEqual(croutonView) || (null == SlideInDownAnimation))
             {
-                slideInDownAnimation = new TranslateAnimation(
+                SlideInDownAnimation = new TranslateAnimation(
                     0, 0, // X: from, to
                     -croutonView.MeasuredHeight, 0 // Y: from, to
                     );
-                slideInDownAnimation.Duration = DURATION;
-                setLastInAnimationHeight(croutonView.MeasuredHeight);
+                SlideInDownAnimation.Duration = DURATION;
+                SetLastInAnimationHeight(croutonView.MeasuredHeight);
             }
-            return slideInDownAnimation;
+            return SlideInDownAnimation;
         }
 
         /**
@@ -42,43 +42,43 @@ namespace CroutonLibrary
    * @return The default Animation for a hiding {@link Crouton}.
    */
 
-        public static Animation buildDefaultSlideOutUpAnimation(View croutonView)
+        public static Animation BuildDefaultSlideOutUpAnimation(View croutonView)
         {
-            if (!areLastMeasuredOutAnimationHeightAndCurrentEqual(croutonView) || (null == slideOutUpAnimation))
+            if (!AreLastMeasuredOutAnimationHeightAndCurrentEqual(croutonView) || (null == SlideOutUpAnimation))
             {
-                slideOutUpAnimation = new TranslateAnimation(
+                SlideOutUpAnimation = new TranslateAnimation(
                     0, 0, // X: from, to
                     0, -croutonView.MeasuredHeight // Y: from, to
                     );
-                slideOutUpAnimation.Duration = DURATION;
-                setLastOutAnimationHeight(croutonView.MeasuredHeight);
+                SlideOutUpAnimation.Duration = DURATION;
+                SetLastOutAnimationHeight(croutonView.MeasuredHeight);
             }
-            return slideOutUpAnimation;
+            return SlideOutUpAnimation;
         }
 
-        private static bool areLastMeasuredInAnimationHeightAndCurrentEqual(View croutonView)
+        private static bool AreLastMeasuredInAnimationHeightAndCurrentEqual(View croutonView)
         {
-            return areLastMeasuredAnimationHeightAndCurrentEqual(lastInAnimationHeight, croutonView);
+            return AreLastMeasuredAnimationHeightAndCurrentEqual(LastInAnimationHeight, croutonView);
         }
 
-        private static bool areLastMeasuredOutAnimationHeightAndCurrentEqual(View croutonView)
+        private static bool AreLastMeasuredOutAnimationHeightAndCurrentEqual(View croutonView)
         {
-            return areLastMeasuredAnimationHeightAndCurrentEqual(lastOutAnimationHeight, croutonView);
+            return AreLastMeasuredAnimationHeightAndCurrentEqual(LastOutAnimationHeight, croutonView);
         }
 
-        private static bool areLastMeasuredAnimationHeightAndCurrentEqual(int lastHeight, View croutonView)
+        private static bool AreLastMeasuredAnimationHeightAndCurrentEqual(int lastHeight, View croutonView)
         {
             return lastHeight == croutonView.MeasuredHeight;
         }
 
-        private static void setLastInAnimationHeight(int lastInAnimationHeight)
+        private static void SetLastInAnimationHeight(int lastInAnimationHeight)
         {
-            DefaultAnimationsBuilder.lastInAnimationHeight = lastInAnimationHeight;
+            LastInAnimationHeight = lastInAnimationHeight;
         }
 
-        private static void setLastOutAnimationHeight(int lastOutAnimationHeight)
+        private static void SetLastOutAnimationHeight(int lastOutAnimationHeight)
         {
-            DefaultAnimationsBuilder.lastOutAnimationHeight = lastOutAnimationHeight;
+            LastOutAnimationHeight = lastOutAnimationHeight;
         }
     }
 }

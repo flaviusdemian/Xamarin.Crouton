@@ -1,38 +1,26 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-
 namespace CroutonLibrary
 {
     public class ConfigurationBuilder
     {
-
         /** Creates a {@link Builder} to build a {@link Configuration} upon. */
 
-        public int durationInMilliseconds = Configuration.DURATION_SHORT;
-        public int inAnimationResId = 0;
-        public int outAnimationResId = 0;
+        public int DurationInMilliseconds = Configuration.DURATION_SHORT;
+        public int InAnimationResId = 0;
+        public int OutAnimationResId = 0;
 
         /**
-         * Set the durationInMilliseconds option of the {@link Crouton}.
+         * Set the DurationInMilliseconds option of the {@link Crouton}.
          *
          * @param duration
-         *   The durationInMilliseconds the crouton will be displayed
+         *   The DurationInMilliseconds the crouton will be displayed
          *   {@link Crouton} in milliseconds.
          *
          * @return the {@link Builder}.
          */
+
         public ConfigurationBuilder SetDuration(int duration)
         {
-            this.durationInMilliseconds = duration;
+            DurationInMilliseconds = duration;
 
             return this;
         }
@@ -40,15 +28,16 @@ namespace CroutonLibrary
         /**
          * The resource id for the in animation.
          *
-         * @param inAnimationResId
+         * @param InAnimationResId
          *   The resource identifier for the animation that's being shown
          *   when the {@link Crouton} is going to be displayed.
          *
          * @return the {@link Builder}.
          */
+
         public ConfigurationBuilder SetInAnimation(int inAnimationResId)
         {
-            this.inAnimationResId = inAnimationResId;
+            InAnimationResId = inAnimationResId;
 
             return this;
         }
@@ -56,15 +45,16 @@ namespace CroutonLibrary
         /**
          * The resource id for the out animation
          *
-         * @param outAnimationResId
+         * @param OutAnimationResId
          *   The resource identifier for the animation that's being shown
          *   when the {@link Crouton} is going to be removed.
          *
          * @return the {@link Builder}.
          */
+
         public ConfigurationBuilder SetOutAnimation(int outAnimationResId)
         {
-            this.outAnimationResId = outAnimationResId;
+            OutAnimationResId = outAnimationResId;
 
             return this;
         }
@@ -74,6 +64,7 @@ namespace CroutonLibrary
          *
          * @return The built {@link Configuration}.
          */
+
         public Configuration Build()
         {
             return new Configuration(this);

@@ -70,18 +70,18 @@ namespace CroutonLibrary
             var currentCrouton = croutonQueue.Peek().JavaCast<Crouton>();
 
             // If the activity is null we poll the Crouton off the queue.
-            if (null == currentCrouton.getActivity())
+            if (null == currentCrouton.GetActivity())
             {
                 croutonQueue.Poll();
             }
 
-            if (!currentCrouton.isShowing())
+            if (!currentCrouton.IsShowing())
             {
                 // Display the Crouton
                 sendMessage(currentCrouton, Convert.ToInt32(Messages.ADD_CROUTON_TO_VIEW));
-                if (null != currentCrouton.getLifecycleCallback())
+                if (null != currentCrouton.GetLifecycleCallback())
                 {
-                    currentCrouton.getLifecycleCallback().onDisplayed();
+                    currentCrouton.GetLifecycleCallback().OnDisplayed();
                 }
             }
             else
@@ -93,9 +93,9 @@ namespace CroutonLibrary
 
         private long calculateCroutonDuration(Crouton crouton)
         {
-            long croutonDuration = crouton.getConfiguration().durationInMilliseconds;
-            croutonDuration += crouton.getInAnimation().Duration;
-            croutonDuration += crouton.getOutAnimation().Duration;
+            long croutonDuration = crouton.GetConfiguration().DurationInMilliseconds;
+            croutonDuration += crouton.GetInAnimation().Duration;
+            croutonDuration += crouton.GetOutAnimation().Duration;
             return croutonDuration;
         }
 
@@ -158,9 +158,9 @@ namespace CroutonLibrary
 
                 case Messages.REMOVE_CROUTON:
                     RemoveCrouton(crouton);
-                    if (null != crouton.getLifecycleCallback())
+                    if (null != crouton.GetLifecycleCallback())
                     {
-                        crouton.getLifecycleCallback().onRemoved();
+                        crouton.GetLifecycleCallback().OnRemoved();
                     }
                     break;
 
@@ -180,12 +180,12 @@ namespace CroutonLibrary
         private void AddCroutonToView(Crouton crouton)
         {
             // don't add if it is already showing
-            if (crouton.isShowing())
+            if (crouton.IsShowing())
             {
                 return;
             }
 
-            View croutonView = crouton.getView();
+            View croutonView = crouton.GetView();
             if (null == croutonView.Parent)
             {
                 ViewGroup.LayoutParams parameters = croutonView.LayoutParameters;
@@ -195,9 +195,9 @@ namespace CroutonLibrary
                         ViewGroup.LayoutParams.WrapContent);
                 }
                 // display Crouton in ViewGroup is it has been supplied
-                if (null != crouton.getViewGroup())
+                if (null != crouton.GetViewGroup())
                 {
-                    ViewGroup croutonViewGroup = crouton.getViewGroup();
+                    ViewGroup croutonViewGroup = crouton.GetViewGroup();
                     if (ShouldAddViewWithoutPosition(croutonViewGroup))
                     {
                         croutonViewGroup.AddView(croutonView, parameters);
@@ -209,7 +209,7 @@ namespace CroutonLibrary
                 }
                 else
                 {
-                    Activity activity = crouton.getActivity();
+                    Activity activity = crouton.GetActivity();
                     if (null == activity || activity.IsFinishing)
                     {
                         return;
@@ -244,14 +244,14 @@ namespace CroutonLibrary
                     croutonView.ViewTreeObserver.RemoveOnGlobalLayoutListener(layoutListener);
                 }
 
-                if (crouton.getInAnimation() != null)
+                if (crouton.GetInAnimation() != null)
                 {
-                    croutonView.StartAnimation(crouton.getInAnimation());
-                    AnnounceForAccessibilityCompat(crouton.getActivity(), crouton.getText());
-                    if (Configuration.DURATION_INFINITE != crouton.getConfiguration().durationInMilliseconds)
+                    croutonView.StartAnimation(crouton.GetInAnimation());
+                    AnnounceForAccessibilityCompat(crouton.GetActivity(), crouton.GetText());
+                    if (Configuration.DURATION_INFINITE != crouton.GetConfiguration().DurationInMilliseconds)
                     {
                         SendMessageDelayed(crouton, Messages.REMOVE_CROUTON,
-                            crouton.getConfiguration().durationInMilliseconds + crouton.getInAnimation().Duration);
+                            crouton.GetConfiguration().DurationInMilliseconds + crouton.GetInAnimation().Duration);
                     }
                 }
             });
@@ -304,7 +304,7 @@ namespace CroutonLibrary
 
         /**
    * Removes the {@link Crouton}'s view after it's display
-   * durationInMilliseconds.
+   * DurationInMilliseconds.
    *
    * @param crouton
    *     The {@link Crouton} added to a {@link ViewGroup} and should be
@@ -313,12 +313,12 @@ namespace CroutonLibrary
 
         public void RemoveCrouton(Crouton crouton)
         {
-            View croutonView = crouton.getView();
+            View croutonView = crouton.GetView();
             var croutonParentView = (ViewGroup)croutonView.Parent;
 
             if (null != croutonParentView)
             {
-                croutonView.StartAnimation(crouton.getOutAnimation());
+                croutonView.StartAnimation(crouton.GetOutAnimation());
 
                 // Remove the Crouton from the queue.
                 var removed = (Crouton)croutonQueue.Poll();
@@ -327,18 +327,18 @@ namespace CroutonLibrary
                 croutonParentView.RemoveView(croutonView);
                 if (null != removed)
                 {
-                    removed.detachActivity();
-                    removed.detachViewGroup();
-                    if (null != removed.getLifecycleCallback())
+                    removed.DetachActivity();
+                    removed.DetachViewGroup();
+                    if (null != removed.GetLifecycleCallback())
                     {
-                        removed.getLifecycleCallback().onRemoved();
+                        removed.GetLifecycleCallback().OnRemoved();
                     }
-                    removed.detachLifecycleCallback();
+                    removed.DetachLifecycleCallback();
                 }
 
                 // Send a message to display the next crouton but delay it by the out
-                // animation duration to make sure it finishes
-                SendMessageDelayed(crouton, Messages.DISPLAY_CROUTON, crouton.getOutAnimation().Duration);
+                // animation duration to Make sure it finishes
+                SendMessageDelayed(crouton, Messages.DISPLAY_CROUTON, crouton.GetOutAnimation().Duration);
             }
         }
 
@@ -355,11 +355,11 @@ namespace CroutonLibrary
             // if Crouton has already been displayed then it may not be in the queue (because it was popped).
             // This ensures the displayed Crouton is removed from its parent immediately, whether another instance
             // of it exists in the queue or not.
-            // Note: crouton.isShowing() is false here even if it really is showing, as croutonView object in
+            // Note: crouton.IsShowing() is false here even if it really is showing, as croutonView object in
             // Crouton seems to be out of sync with reality!
-            if (null != crouton.getActivity() && null != crouton.getView() && null != crouton.getView().Parent)
+            if (null != crouton.GetActivity() && null != crouton.GetView() && null != crouton.GetView().Parent)
             {
-                ((ViewGroup)crouton.getView().Parent).RemoveView(crouton.getView());
+                ((ViewGroup)crouton.GetView().Parent).RemoveView(crouton.GetView());
 
                 // remove any messages pending for the crouton
                 RemoveAllMessagesForCrouton(crouton);
@@ -369,7 +369,7 @@ namespace CroutonLibrary
             while (croutonIterator.HasNext)
             {
                 var c = croutonIterator.Next().JavaCast<Crouton>();
-                if (c.Equals(crouton) && (null != c.getActivity()))
+                if (c.Equals(crouton) && (null != c.GetActivity()))
                 {
                     // remove the crouton from the content view
                     RemoveCroutonFromViewParent(crouton);
@@ -414,7 +414,7 @@ namespace CroutonLibrary
             while (croutonIterator.HasNext)
             {
                 var crouton = croutonIterator.Next().JavaCast<Crouton>();
-                if ((null != crouton.getActivity()) && crouton.getActivity().Equals(activity))
+                if ((null != crouton.GetActivity()) && crouton.GetActivity().Equals(activity))
                 {
                     // remove the crouton from the content view
                     RemoveCroutonFromViewParent(crouton);
@@ -429,12 +429,12 @@ namespace CroutonLibrary
 
         private void RemoveCroutonFromViewParent(Crouton crouton)
         {
-            if (crouton.isShowing())
+            if (crouton.IsShowing())
             {
-                var parent = (ViewGroup)crouton.getView().Parent;
+                var parent = (ViewGroup)crouton.GetView().Parent;
                 if (null != parent)
                 {
-                    parent.RemoveView(crouton.getView());
+                    parent.RemoveView(crouton.GetView());
                 }
             }
         }

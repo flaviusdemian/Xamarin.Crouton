@@ -18,30 +18,31 @@ namespace CroutonLibrary
         private static String NULL_PARAMETERS_ARE_NOT_ACCEPTED = "Null parameters are not accepted";
         private static int IMAGE_ID = 0x100;
         private static int TEXT_ID = 0x101;
-        private String text;
-        private Style style;
-        private Configuration configuration = null;
-        private View customView;
-        private View.IOnClickListener onClickListener;
+        private readonly View CustomView;
+        private readonly Style Style;
+        private readonly String Text;
 
-        private Activity activity;
-        private ViewGroup viewGroup;
-        private FrameLayout croutonView;
-        private Animation inAnimation;
-        private Animation outAnimation;
-        private LifecycleCallback lifecycleCallback = null;
+        private Activity Activity;
+        private Configuration Configuration;
+        private FrameLayout CroutonView;
+        private Animation InAnimation;
+        private LifecycleCallback LifecycleCallback;
+        private View.IOnClickListener OnClickListener;
+        private Animation OutAnimation;
+        private ViewGroup ViewGroup;
 
         /**
          * Creates the {@link Crouton}.
          *
-         * @param activity
+         * @param Activity
          *     The {@link Activity} that the {@link Crouton} should be attached
          *     to.
-         * @param text
-         *     The text you want to display.
-         * @param style
-         *     The style that this {@link Crouton} should be created with.
+         * @param Text
+         *     The Text you want to display.
+         * @param Style
+         *     The Style that this {@link Crouton} should be created with.
          */
+
         private Crouton(Activity activity, String text, Style style)
         {
             if ((activity == null) || (text == null) || (style == null))
@@ -49,25 +50,26 @@ namespace CroutonLibrary
                 throw new IllegalArgumentException(NULL_PARAMETERS_ARE_NOT_ACCEPTED);
             }
 
-            this.activity = activity;
-            this.viewGroup = null;
-            this.text = text;
-            this.style = style;
-            this.customView = null;
+            Activity = activity;
+            ViewGroup = null;
+            Text = text;
+            Style = style;
+            CustomView = null;
         }
 
         /**
          * Creates the {@link Crouton}.
          *
-         * @param activity
+         * @param Activity
          *     The {@link Activity} that represents the context in which the Crouton should exist.
-         * @param text
-         *     The text you want to display.
-         * @param style
-         *     The style that this {@link Crouton} should be created with.
-         * @param viewGroup
+         * @param Text
+         *     The Text you want to display.
+         * @param Style
+         *     The Style that this {@link Crouton} should be created with.
+         * @param ViewGroup
          *     The {@link ViewGroup} that this {@link Crouton} should be added to.
          */
+
         private Crouton(Activity activity, String text, Style style, ViewGroup viewGroup)
         {
             if ((activity == null) || (text == null) || (style == null))
@@ -75,22 +77,23 @@ namespace CroutonLibrary
                 throw new IllegalArgumentException(NULL_PARAMETERS_ARE_NOT_ACCEPTED);
             }
 
-            this.activity = activity;
-            this.text = text;
-            this.style = style;
-            this.viewGroup = viewGroup;
-            this.customView = null;
+            Activity = activity;
+            Text = text;
+            Style = style;
+            ViewGroup = viewGroup;
+            CustomView = null;
         }
 
         /**
          * Creates the {@link Crouton}.
          *
-         * @param activity
+         * @param Activity
          *     The {@link Activity} that the {@link Crouton} should be attached
          *     to.
-         * @param customView
+         * @param CustomView
          *     The custom {@link View} to display
          */
+
         private Crouton(Activity activity, View customView)
         {
             if ((activity == null) || (customView == null))
@@ -98,41 +101,42 @@ namespace CroutonLibrary
                 throw new IllegalArgumentException(NULL_PARAMETERS_ARE_NOT_ACCEPTED);
             }
 
-            this.activity = activity;
-            this.viewGroup = null;
-            this.customView = customView;
-            this.style = new StyleBuilder().Build();
-            this.text = null;
+            Activity = activity;
+            ViewGroup = null;
+            CustomView = customView;
+            Style = new StyleBuilder().Build();
+            Text = null;
         }
 
         /**
          * Creates the {@link Crouton}.
          *
-         * @param activity
+         * @param Activity
          *     The {@link Activity} that represents the context in which the Crouton should exist.
-         * @param customView
+         * @param CustomView
          *     The custom {@link View} to display
-         * @param viewGroup
+         * @param ViewGroup
          *     The {@link ViewGroup} that this {@link Crouton} should be added to.
          */
+
         private Crouton(Activity activity, View customView, ViewGroup viewGroup)
             : this(activity, customView, viewGroup, Configuration.DEFAULT)
         {
-
         }
 
         /**
          * Creates the {@link Crouton}.
          *
-         * @param activity
+         * @param Activity
          *     The {@link Activity} that represents the context in which the Crouton should exist.
-         * @param customView
+         * @param CustomView
          *     The custom {@link View} to display
-         * @param viewGroup
+         * @param ViewGroup
          *     The {@link ViewGroup} that this {@link Crouton} should be added to.
-         * @param configuration
+         * @param Configuration
          *     The {@link Configuration} for this {@link Crouton}.
          */
+
         private Crouton(Activity activity, View customView, ViewGroup viewGroup, Configuration configuration)
         {
             if ((activity == null) || (customView == null))
@@ -140,409 +144,436 @@ namespace CroutonLibrary
                 throw new IllegalArgumentException(NULL_PARAMETERS_ARE_NOT_ACCEPTED);
             }
 
-            this.activity = activity;
-            this.customView = customView;
-            this.viewGroup = viewGroup;
-            this.style = new StyleBuilder().Build();
-            this.text = null;
-            this.configuration = configuration;
+            Activity = activity;
+            CustomView = customView;
+            ViewGroup = viewGroup;
+            Style = new StyleBuilder().Build();
+            Text = null;
+            Configuration = configuration;
         }
 
         /**
-         * Creates a {@link Crouton} with provided text and style for a given
-         * activity.
+         * Creates a {@link Crouton} with provided Text and Style for a given
+         * Activity.
          *
-         * @param activity
+         * @param Activity
          *     The {@link Activity} that the {@link Crouton} should be attached
          *     to.
-         * @param text
-         *     The text you want to display.
-         * @param style
-         *     The style that this {@link Crouton} should be created with.
+         * @param Text
+         *     The Text you want to display.
+         * @param Style
+         *     The Style that this {@link Crouton} should be created with.
          *
          * @return The created {@link Crouton}.
          */
-        public static Crouton makeText(Activity activity, String text, Style style)
+
+        public static Crouton MakeText(Activity activity, String text, Style style)
         {
             return new Crouton(activity, text, style);
         }
 
         /**
-         * Creates a {@link Crouton} with provided text and style for a given
-         * activity.
+         * Creates a {@link Crouton} with provided Text and Style for a given
+         * Activity.
          *
-         * @param activity
+         * @param Activity
          *     The {@link Activity} that represents the context in which the Crouton should exist.
-         * @param text
-         *     The text you want to display.
-         * @param style
-         *     The style that this {@link Crouton} should be created with.
-         * @param viewGroup
+         * @param Text
+         *     The Text you want to display.
+         * @param Style
+         *     The Style that this {@link Crouton} should be created with.
+         * @param ViewGroup
          *     The {@link ViewGroup} that this {@link Crouton} should be added to.
          *
          * @return The created {@link Crouton}.
          */
-        public static Crouton makeText(Activity activity, String text, Style style, ViewGroup viewGroup)
+
+        public static Crouton MakeText(Activity activity, String text, Style style, ViewGroup viewGroup)
         {
             return new Crouton(activity, text, style, viewGroup);
         }
 
         /**
-         * Creates a {@link Crouton} with provided text and style for a given
-         * activity.
+         * Creates a {@link Crouton} with provided Text and Style for a given
+         * Activity.
          *
-         * @param activity
+         * @param Activity
          *     The {@link Activity} that represents the context in which the Crouton should exist.
-         * @param text
-         *     The text you want to display.
-         * @param style
-         *     The style that this {@link Crouton} should be created with.
+         * @param Text
+         *     The Text you want to display.
+         * @param Style
+         *     The Style that this {@link Crouton} should be created with.
          * @param viewGroupResId
          *     The resource id of the {@link ViewGroup} that this {@link Crouton} should be added to.
          *
          * @return The created {@link Crouton}.
          */
-        public static Crouton makeText(Activity activity, String text, Style style, int viewGroupResId)
+
+        public static Crouton MakeText(Activity activity, String text, Style style, int viewGroupResId)
         {
             return new Crouton(activity, text, style, activity.FindViewById<ViewGroup>(viewGroupResId));
         }
 
 
         /**
-         * Creates a {@link Crouton} with provided text-resource and style for a given
-         * activity.
+         * Creates a {@link Crouton} with provided Text-resource and Style for a given
+         * Activity.
          *
-         * @param activity
+         * @param Activity
          *     The {@link Activity} that the {@link Crouton} should be attached
          *     to.
          * @param textResourceId
-         *     The resource id of the text you want to display.
-         * @param style
-         *     The style that this {@link Crouton} should be created with.
+         *     The resource id of the Text you want to display.
+         * @param Style
+         *     The Style that this {@link Crouton} should be created with.
          *
          * @return The created {@link Crouton}.
          */
-        public static Crouton makeText(Activity activity, int textResourceId, Style style)
+
+        public static Crouton MakeText(Activity activity, int textResourceId, Style style)
         {
-            return makeText(activity, activity.GetString(textResourceId), style);
+            return MakeText(activity, activity.GetString(textResourceId), style);
         }
 
         /**
-         * Creates a {@link Crouton} with provided text-resource and style for a given
-         * activity.
+         * Creates a {@link Crouton} with provided Text-resource and Style for a given
+         * Activity.
          *
-         * @param activity
+         * @param Activity
          *     The {@link Activity} that represents the context in which the Crouton should exist.
          * @param textResourceId
-         *     The resource id of the text you want to display.
-         * @param style
-         *     The style that this {@link Crouton} should be created with.
-         * @param viewGroup
+         *     The resource id of the Text you want to display.
+         * @param Style
+         *     The Style that this {@link Crouton} should be created with.
+         * @param ViewGroup
          *     The {@link ViewGroup} that this {@link Crouton} should be added to.
          *
          * @return The created {@link Crouton}.
          */
-        public static Crouton makeText(Activity activity, int textResourceId, Style style, ViewGroup viewGroup)
+
+        public static Crouton MakeText(Activity activity, int textResourceId, Style style, ViewGroup viewGroup)
         {
-            return makeText(activity, activity.Resources.GetString(textResourceId), style, viewGroup);
+            return MakeText(activity, activity.Resources.GetString(textResourceId), style, viewGroup);
         }
 
         /**
-         * Creates a {@link Crouton} with provided text-resource and style for a given
-         * activity.
+         * Creates a {@link Crouton} with provided Text-resource and Style for a given
+         * Activity.
          *
-         * @param activity
+         * @param Activity
          *     The {@link Activity} that represents the context in which the Crouton should exist.
          * @param textResourceId
-         *     The resource id of the text you want to display.
-         * @param style
-         *     The style that this {@link Crouton} should be created with.
+         *     The resource id of the Text you want to display.
+         * @param Style
+         *     The Style that this {@link Crouton} should be created with.
          * @param viewGroupResId
          *     The resource id of the {@link ViewGroup} that this {@link Crouton} should be added to.
          *
          * @return The created {@link Crouton}.
          */
-        public static Crouton makeText(Activity activity, int textResourceId, Style style, int viewGroupResId)
+
+        public static Crouton MakeText(Activity activity, int textResourceId, Style style, int viewGroupResId)
         {
-            return makeText(activity, activity.GetString(textResourceId), style, activity.FindViewById<ViewGroup>(viewGroupResId));
+            return MakeText(activity, activity.GetString(textResourceId), style,
+                activity.FindViewById<ViewGroup>(viewGroupResId));
         }
 
 
         /**
-         * Creates a {@link Crouton} with provided text-resource and style for a given
-         * activity.
+         * Creates a {@link Crouton} with provided Text-resource and Style for a given
+         * Activity.
          *
-         * @param activity
+         * @param Activity
          *     The {@link Activity} that the {@link Crouton} should be attached
          *     to.
-         * @param customView
+         * @param CustomView
          *     The custom {@link View} to display
          *
          * @return The created {@link Crouton}.
          */
-        public static Crouton make(Activity activity, View customView)
+
+        public static Crouton Make(Activity activity, View customView)
         {
             return new Crouton(activity, customView);
         }
 
         /**
-         * Creates a {@link Crouton} with provided text-resource and style for a given
-         * activity.
+         * Creates a {@link Crouton} with provided Text-resource and Style for a given
+         * Activity.
          *
-         * @param activity
+         * @param Activity
          *     The {@link Activity} that represents the context in which the Crouton should exist.
-         * @param customView
+         * @param CustomView
          *     The custom {@link View} to display
-         * @param viewGroup
+         * @param ViewGroup
          *     The {@link ViewGroup} that this {@link Crouton} should be added to.
          *
          * @return The created {@link Crouton}.
          */
-        public static Crouton make(Activity activity, View customView, ViewGroup viewGroup)
+
+        public static Crouton Make(Activity activity, View customView, ViewGroup viewGroup)
         {
             return new Crouton(activity, customView, viewGroup);
         }
 
         /**
-         * Creates a {@link Crouton} with provided text-resource and style for a given
-         * activity.
+         * Creates a {@link Crouton} with provided Text-resource and Style for a given
+         * Activity.
          *
-         * @param activity
+         * @param Activity
          *     The {@link Activity} that represents the context in which the Crouton should exist.
-         * @param customView
+         * @param CustomView
          *     The custom {@link View} to display
          * @param viewGroupResId
          *     The resource id of the {@link ViewGroup} that this {@link Crouton} should be added to.
          *
          * @return The created {@link Crouton}.
          */
-        public static Crouton make(Activity activity, View customView, int viewGroupResId)
+
+        public static Crouton Make(Activity activity, View customView, int viewGroupResId)
         {
             return new Crouton(activity, customView, activity.FindViewById<ViewGroup>(viewGroupResId));
         }
 
         /**
-         * Creates a {@link Crouton} with provided text-resource and style for a given
-         * activity.
+         * Creates a {@link Crouton} with provided Text-resource and Style for a given
+         * Activity.
          *
-         * @param activity
+         * @param Activity
          *     The {@link Activity} that represents the context in which the Crouton should exist.
-         * @param customView
+         * @param CustomView
          *     The custom {@link View} to display
          * @param viewGroupResId
          *     The resource id of the {@link ViewGroup} that this {@link Crouton} should be added to.
-         * @param configuration
-         *     The configuration for this crouton.
+         * @param Configuration
+         *     The Configuration for this crouton.
          *
          * @return The created {@link Crouton}.
          */
-        public static Crouton make(Activity activity, View customView, int viewGroupResId, Configuration configuration)
+
+        public static Crouton Make(Activity activity, View customView, int viewGroupResId, Configuration configuration)
         {
             return new Crouton(activity, customView, activity.FindViewById<ViewGroup>(viewGroupResId), configuration);
         }
 
         /**
-         * Creates a {@link Crouton} with provided text and style for a given activity
+         * Creates a {@link Crouton} with provided Text and Style for a given Activity
          * and displays it directly.
          *
-         * @param activity
+         * @param Activity
          *     The {@link android.app.Activity} that the {@link Crouton} should
          *     be attached to.
-         * @param text
-         *     The text you want to display.
-         * @param style
-         *     The style that this {@link Crouton} should be created with.
+         * @param Text
+         *     The Text you want to display.
+         * @param Style
+         *     The Style that this {@link Crouton} should be created with.
          */
-        public static void showText(Activity activity, String text, Style style)
+
+        public static void ShowText(Activity activity, String text, Style style)
         {
-            makeText(activity, text, style).Show();
+            MakeText(activity, text, style).Show();
         }
 
         /**
-         * Creates a {@link Crouton} with provided text and style for a given activity
+         * Creates a {@link Crouton} with provided Text and Style for a given Activity
          * and displays it directly.
          *
-         * @param activity
+         * @param Activity
          *     The {@link Activity} that represents the context in which the Crouton should exist.
-         * @param text
-         *     The text you want to display.
-         * @param style
-         *     The style that this {@link Crouton} should be created with.
-         * @param viewGroup
+         * @param Text
+         *     The Text you want to display.
+         * @param Style
+         *     The Style that this {@link Crouton} should be created with.
+         * @param ViewGroup
          *     The {@link ViewGroup} that this {@link Crouton} should be added to.
          */
-        public static void showText(Activity activity, String text, Style style, ViewGroup viewGroup)
+
+        public static void ShowText(Activity activity, String text, Style style, ViewGroup viewGroup)
         {
-            makeText(activity, text, style, viewGroup).Show();
+            MakeText(activity, text, style, viewGroup).Show();
         }
 
         /**
-         * Creates a {@link Crouton} with provided text and style for a given activity
+         * Creates a {@link Crouton} with provided Text and Style for a given Activity
          * and displays it directly.
          *
-         * @param activity
+         * @param Activity
          *     The {@link Activity} that represents the context in which the Crouton should exist.
-         * @param text
-         *     The text you want to display.
-         * @param style
-         *     The style that this {@link Crouton} should be created with.
+         * @param Text
+         *     The Text you want to display.
+         * @param Style
+         *     The Style that this {@link Crouton} should be created with.
          * @param viewGroupResId
          *     The resource id of the {@link ViewGroup} that this {@link Crouton} should be added to.
          */
-        public static void showText(Activity activity, String text, Style style, int viewGroupResId)
+
+        public static void ShowText(Activity activity, String text, Style style, int viewGroupResId)
         {
-            makeText(activity, text, style, activity.FindViewById<ViewGroup>(viewGroupResId)).Show();
+            MakeText(activity, text, style, activity.FindViewById<ViewGroup>(viewGroupResId)).Show();
         }
 
         /**
-         * Creates a {@link Crouton} with provided text and style for a given activity
+         * Creates a {@link Crouton} with provided Text and Style for a given Activity
          * and displays it directly.
          *
-         * @param activity
+         * @param Activity
          *     The {@link Activity} that represents the context in which the Crouton should exist.
-         * @param text
-         *     The text you want to display.
-         * @param style
-         *     The style that this {@link Crouton} should be created with.
+         * @param Text
+         *     The Text you want to display.
+         * @param Style
+         *     The Style that this {@link Crouton} should be created with.
          * @param viewGroupResId
          *     The resource id of the {@link ViewGroup} that this {@link Crouton} should be added to.
-         * @param configuration
-         *     The configuration for this Crouton.
+         * @param Configuration
+         *     The Configuration for this Crouton.
          */
-        public static void showText(Activity activity, String text, Style style, int viewGroupResId, Configuration configuration)
+
+        public static void ShowText(Activity activity, String text, Style style, int viewGroupResId,
+            Configuration configuration)
         {
-            makeText(activity, text, style, activity.FindViewById<ViewGroup>(viewGroupResId)).SetConfiguration(configuration).Show();
+            MakeText(activity, text, style, activity.FindViewById<ViewGroup>(viewGroupResId))
+                .SetConfiguration(configuration)
+                .Show();
         }
 
 
         /**
-         * Creates a {@link Crouton} with provided text and style for a given activity
+         * Creates a {@link Crouton} with provided Text and Style for a given Activity
          * and displays it directly.
          *
-         * @param activity
+         * @param Activity
          *     The {@link android.app.Activity} that the {@link Crouton} should
          *     be attached to.
-         * @param customView
+         * @param CustomView
          *     The custom {@link View} to display
          */
+
         public static void Show(Activity activity, View customView)
         {
-            make(activity, customView).Show();
+            Make(activity, customView).Show();
         }
 
         /**
-         * Creates a {@link Crouton} with provided text and style for a given activity
+         * Creates a {@link Crouton} with provided Text and Style for a given Activity
          * and displays it directly.
          *
-         * @param activity
+         * @param Activity
          *     The {@link Activity} that represents the context in which the Crouton should exist.
-         * @param customView
+         * @param CustomView
          *     The custom {@link View} to display
-         * @param viewGroup
+         * @param ViewGroup
          *     The {@link ViewGroup} that this {@link Crouton} should be added to.
          */
+
         public static void Show(Activity activity, View customView, ViewGroup viewGroup)
         {
-            make(activity, customView, viewGroup).Show();
+            Make(activity, customView, viewGroup).Show();
         }
 
         /**
-         * Creates a {@link Crouton} with provided text and style for a given activity
+         * Creates a {@link Crouton} with provided Text and Style for a given Activity
          * and displays it directly.
          *
-         * @param activity
+         * @param Activity
          *     The {@link Activity} that represents the context in which the Crouton should exist.
-         * @param customView
+         * @param CustomView
          *     The custom {@link View} to display
          * @param viewGroupResId
          *     The resource id of the {@link ViewGroup} that this {@link Crouton} should be added to.
          */
+
         public static void Show(Activity activity, View customView, int viewGroupResId)
         {
-            make(activity, customView, viewGroupResId).Show();
+            Make(activity, customView, viewGroupResId).Show();
         }
 
         /**
-         * Creates a {@link Crouton} with provided text-resource and style for a given
-         * activity and displays it directly.
+         * Creates a {@link Crouton} with provided Text-resource and Style for a given
+         * Activity and displays it directly.
          *
-         * @param activity
+         * @param Activity
          *     The {@link Activity} that the {@link Crouton} should be attached
          *     to.
          * @param textResourceId
-         *     The resource id of the text you want to display.
-         * @param style
-         *     The style that this {@link Crouton} should be created with.
+         *     The resource id of the Text you want to display.
+         * @param Style
+         *     The Style that this {@link Crouton} should be created with.
          */
-        public static void showText(Activity activity, int textResourceId, Style style)
+
+        public static void ShowText(Activity activity, int textResourceId, Style style)
         {
-            showText(activity, activity.GetString(textResourceId), style);
+            ShowText(activity, activity.GetString(textResourceId), style);
         }
 
         /**
-         * Creates a {@link Crouton} with provided text-resource and style for a given
-         * activity and displays it directly.
+         * Creates a {@link Crouton} with provided Text-resource and Style for a given
+         * Activity and displays it directly.
          *
-         * @param activity
+         * @param Activity
          *     The {@link Activity} that represents the context in which the Crouton should exist.
          * @param textResourceId
-         *     The resource id of the text you want to display.
-         * @param style
-         *     The style that this {@link Crouton} should be created with.
-         * @param viewGroup
+         *     The resource id of the Text you want to display.
+         * @param Style
+         *     The Style that this {@link Crouton} should be created with.
+         * @param ViewGroup
          *     The {@link ViewGroup} that this {@link Crouton} should be added to.
          */
-        public static void showText(Activity activity, int textResourceId, Style style, ViewGroup viewGroup)
+
+        public static void ShowText(Activity activity, int textResourceId, Style style, ViewGroup viewGroup)
         {
-            showText(activity, activity.GetString(textResourceId), style, viewGroup);
+            ShowText(activity, activity.GetString(textResourceId), style, viewGroup);
         }
 
         /**
-         * Creates a {@link Crouton} with provided text-resource and style for a given
-         * activity and displays it directly.
+         * Creates a {@link Crouton} with provided Text-resource and Style for a given
+         * Activity and displays it directly.
          *
-         * @param activity
+         * @param Activity
          *     The {@link Activity} that represents the context in which the Crouton should exist.
          * @param textResourceId
-         *     The resource id of the text you want to display.
-         * @param style
-         *     The style that this {@link Crouton} should be created with.
+         *     The resource id of the Text you want to display.
+         * @param Style
+         *     The Style that this {@link Crouton} should be created with.
          * @param viewGroupResId
          *     The resource id of the {@link ViewGroup} that this {@link Crouton} should be added to.
          */
-        public static void showText(Activity activity, int textResourceId, Style style, int viewGroupResId)
+
+        public static void ShowText(Activity activity, int textResourceId, Style style, int viewGroupResId)
         {
-            showText(activity, activity.GetString(textResourceId), style, viewGroupResId);
+            ShowText(activity, activity.GetString(textResourceId), style, viewGroupResId);
         }
 
         /**
          * Allows hiding of a previously displayed {@link Crouton}.
          *
          * @param crouton
-         *     The {@link Crouton} you want to hide.
+         *     The {@link Crouton} you want to Hide.
          */
-        public static void hide(Crouton crouton)
+
+        public static void Hide(Crouton crouton)
         {
-            crouton.hide();
+            crouton.Hide();
         }
 
         /**
          * Cancels all queued {@link Crouton}s. If there is a {@link Crouton}
          * displayed currently, it will be the last one displayed.
          */
-        public static void cancelAllCroutons()
+
+        public static void CancelAllCroutons()
         {
             Manager.getInstance().ClearCroutonQueue();
         }
 
         /**
          * Clears (and removes from {@link Activity}'s content view, if necessary) all
-         * croutons for the provided activity
+         * croutons for the provided Activity
          *
-         * @param activity
+         * @param Activity
          *     - The {@link Activity} to clear the croutons for.
          */
-        public static void clearCroutonsForActivity(Activity activity)
+
+        public static void ClearCroutonsForActivity(Activity activity)
         {
             Manager.getInstance().ClearCroutonsForActivity(activity);
         }
@@ -550,7 +581,8 @@ namespace CroutonLibrary
         /**
          * Cancels a {@link Crouton} immediately.
          */
-        public void cancel()
+
+        public void Cancel()
         {
             Manager manager = Manager.getInstance();
             manager.RemoveCroutonImmediately(this);
@@ -560,53 +592,55 @@ namespace CroutonLibrary
          * Displays the {@link Crouton}. If there's another {@link Crouton} visible at
          * the time, this {@link Crouton} will be displayed afterwards.
          */
+
         public void Show()
         {
             Manager.getInstance().add(this);
         }
 
-        public Animation getInAnimation()
+        public Animation GetInAnimation()
         {
-            if ((null == this.inAnimation) && (null != this.activity))
+            if ((null == InAnimation) && (null != Activity))
             {
-                if (getConfiguration().inAnimationResId > 0)
+                if (GetConfiguration().InAnimationResId > 0)
                 {
-                    this.inAnimation = AnimationUtils.LoadAnimation(getActivity(), getConfiguration().inAnimationResId);
+                    InAnimation = AnimationUtils.LoadAnimation(GetActivity(), GetConfiguration().InAnimationResId);
                 }
                 else
                 {
-                    measureCroutonView();
-                    this.inAnimation = DefaultAnimationsBuilder.buildDefaultSlideInDownAnimation(getView());
+                    MeasureCroutonView();
+                    InAnimation = DefaultAnimationsBuilder.BuildDefaultSlideInDownAnimation(GetView());
                 }
             }
 
-            return inAnimation;
+            return InAnimation;
         }
 
-        public Animation getOutAnimation()
+        public Animation GetOutAnimation()
         {
-            if ((null == this.outAnimation) && (null != this.activity))
+            if ((null == OutAnimation) && (null != Activity))
             {
-                if (getConfiguration().outAnimationResId > 0)
+                if (GetConfiguration().OutAnimationResId > 0)
                 {
-                    this.outAnimation = AnimationUtils.LoadAnimation(getActivity(), getConfiguration().outAnimationResId);
+                    OutAnimation = AnimationUtils.LoadAnimation(GetActivity(), GetConfiguration().OutAnimationResId);
                 }
                 else
                 {
-                    this.outAnimation = DefaultAnimationsBuilder.buildDefaultSlideOutUpAnimation(getView());
+                    OutAnimation = DefaultAnimationsBuilder.BuildDefaultSlideOutUpAnimation(GetView());
                 }
             }
 
-            return outAnimation;
+            return OutAnimation;
         }
 
         /**
-         * @param lifecycleCallback
+         * @param LifecycleCallback
          *     Callback object for notable events in the life of a Crouton.
          */
-        public void setLifecycleCallback(LifecycleCallback lifecycleCallback)
+
+        public void SetLifecycleCallback(LifecycleCallback lifecycleCallback)
         {
-            this.lifecycleCallback = lifecycleCallback;
+            LifecycleCallback = lifecycleCallback;
         }
 
         /**
@@ -614,7 +648,8 @@ namespace CroutonLibrary
          *
          * @since 1.9
          */
-        public void hide()
+
+        public void Hide()
         {
             Manager.getInstance().RemoveCrouton(this);
         }
@@ -622,69 +657,72 @@ namespace CroutonLibrary
         /**
          * Allows setting of an {@link OnClickListener} directly to a {@link Crouton} without having to use a custom view.
          *
-         * @param onClickListener
+         * @param OnClickListener
          *     The {@link OnClickListener} to set.
          *
          * @return this {@link Crouton}.
          */
+
         public Crouton SetOnClickListener(View.IOnClickListener onClickListener)
         {
-            this.onClickListener = onClickListener;
+            OnClickListener = onClickListener;
             return this;
         }
 
         /**
          * Set the {@link Configuration} on this {@link Crouton}, prior to showing it.
          *
-         * @param configuration
+         * @param Configuration
          *     a {@link Configuration} built using the {@link Configuration.Builder}.
          *
          * @return this {@link Crouton}.
          */
+
         public Crouton SetConfiguration(Configuration configuration)
         {
-            this.configuration = configuration;
+            Configuration = configuration;
             return this;
         }
+
         public override string ToString()
         {
-
             return "Crouton{" +
-                "text=" + text +
-                ", style=" + style +
-                ", configuration=" + configuration +
-                ", customView=" + customView +
-                ", onClickListener=" + onClickListener +
-                ", activity=" + activity +
-                ", viewGroup=" + viewGroup +
-                ", croutonView=" + croutonView +
-                ", inAnimation=" + inAnimation +
-                ", outAnimation=" + outAnimation +
-                ", lifecycleCallback=" + lifecycleCallback +
-                '}';
+                   "Text=" + Text +
+                   ", Style=" + Style +
+                   ", Configuration=" + Configuration +
+                   ", CustomView=" + CustomView +
+                   ", OnClickListener=" + OnClickListener +
+                   ", Activity=" + Activity +
+                   ", ViewGroup=" + ViewGroup +
+                   ", CroutonView=" + CroutonView +
+                   ", InAnimation=" + InAnimation +
+                   ", OutAnimation=" + OutAnimation +
+                   ", LifecycleCallback=" + LifecycleCallback +
+                   '}';
         }
 
         /**
-         * Convenience method to get the license text for embedding within your application.
+         * Convenience method to get the license Text for embedding within your application.
          *
-         * @return The license text.
+         * @return The license Text.
          */
-        public static String getLicenseText()
+
+        public static String GetLicenseText()
         {
             return "This application uses the Crouton library.\n\n" +
-                "Copyright 2012 - 2013 Benjamin Weiss \n" +
-                "\n" +
-                "Licensed under the Apache License, Version 2.0 (the \"License\");\n" +
-                "you may not use this file except in compliance with the License.\n" +
-                "You may obtain a copy of the License at\n" +
-                "\n" +
-                "   http://www.apache.org/licenses/LICENSE-2.0\n" +
-                "\n" +
-                "Unless required by applicable law or agreed to in writing, software\n" +
-                "distributed under the License is distributed on an \"AS IS\" BASIS,\n" +
-                "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n" +
-                "See the License for the specific language governing permissions and\n" +
-                "limitations under the License.";
+                   "Copyright 2012 - 2013 Benjamin Weiss \n" +
+                   "\n" +
+                   "Licensed under the Apache License, Version 2.0 (the \"License\");\n" +
+                   "you may not use this file except in compliance with the License.\n" +
+                   "You may obtain a copy of the License at\n" +
+                   "\n" +
+                   "   http://www.apache.org/licenses/LICENSE-2.0\n" +
+                   "\n" +
+                   "Unless required by applicable law or agreed to in writing, software\n" +
+                   "distributed under the License is distributed on an \"AS IS\" BASIS,\n" +
+                   "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n" +
+                   "See the License for the specific language governing permissions and\n" +
+                   "limitations under the License.";
         }
 
         //////////////////////////////////////////////////////////////////////////////////////
@@ -696,195 +734,208 @@ namespace CroutonLibrary
          * @return <code>true</code> if the {@link Crouton} is being displayed, else
          * <code>false</code>.
          */
-        public bool isShowing()
+
+        public bool IsShowing()
         {
-            return (null != activity) && (isCroutonViewNotNull() || isCustomViewNotNull());
+            return (null != Activity) && (IsCroutonViewNotNull() || IsCustomViewNotNull());
         }
 
-        private bool isCroutonViewNotNull()
+        private bool IsCroutonViewNotNull()
         {
-            return (null != croutonView) && (null != croutonView.Parent);
+            return (null != CroutonView) && (null != CroutonView.Parent);
         }
 
-        private bool isCustomViewNotNull()
+        private bool IsCustomViewNotNull()
         {
-            return (null != customView) && (null != customView.Parent);
-        }
-
-        /**
-         * Removes the activity reference this {@link Crouton} is holding
-         */
-        public void detachActivity()
-        {
-            activity = null;
+            return (null != CustomView) && (null != CustomView.Parent);
         }
 
         /**
-         * Removes the viewGroup reference this {@link Crouton} is holding
+         * Removes the Activity reference this {@link Crouton} is holding
          */
-        public void detachViewGroup()
+
+        public void DetachActivity()
         {
-            viewGroup = null;
+            Activity = null;
         }
 
         /**
-         * Removes the lifecycleCallback reference this {@link Crouton} is holding
+         * Removes the ViewGroup reference this {@link Crouton} is holding
          */
-        public void detachLifecycleCallback()
+
+        public void DetachViewGroup()
         {
-            lifecycleCallback = null;
+            ViewGroup = null;
         }
 
         /**
-         * @return the lifecycleCallback
+         * Removes the LifecycleCallback reference this {@link Crouton} is holding
          */
-        public LifecycleCallback getLifecycleCallback()
+
+        public void DetachLifecycleCallback()
         {
-            return lifecycleCallback;
+            LifecycleCallback = null;
         }
 
         /**
-         * @return the style
+         * @return the LifecycleCallback
          */
-        Style getStyle()
+
+        public LifecycleCallback GetLifecycleCallback()
         {
-            return style;
+            return LifecycleCallback;
         }
 
         /**
-         * @return this croutons configuration
+         * @return the Style
          */
-        public Configuration getConfiguration()
+
+        private Style GetStyle()
         {
-            if (null == configuration)
+            return Style;
+        }
+
+        /**
+         * @return this croutons Configuration
+         */
+
+        public Configuration GetConfiguration()
+        {
+            if (null == Configuration)
             {
-                configuration = getStyle().configuration;
+                Configuration = GetStyle().Configuration;
             }
-            return configuration;
+            return Configuration;
         }
 
         /**
-         * @return the activity
+         * @return the Activity
          */
-        public Activity getActivity()
+
+        public Activity GetActivity()
         {
-            return activity;
+            return Activity;
         }
 
         /**
-         * @return the viewGroup
+         * @return the ViewGroup
          */
-        public ViewGroup getViewGroup()
+
+        public ViewGroup GetViewGroup()
         {
-            return viewGroup;
+            return ViewGroup;
         }
 
         /**
-         * @return the text
+         * @return the Text
          */
-        public String getText()
+
+        public String GetText()
         {
-            return text;
+            return Text;
         }
 
         /**
          * @return the view
          */
-        public View getView()
+
+        public View GetView()
         {
             // return the custom view if one exists
-            if (null != this.customView)
+            if (null != CustomView)
             {
-                return this.customView;
+                return CustomView;
             }
 
             // if already setup return the view
-            if (null == this.croutonView)
+            if (null == CroutonView)
             {
-                initializeCroutonView();
+                InitializeCroutonView();
             }
 
-            return croutonView;
+            return CroutonView;
         }
 
-        private void measureCroutonView()
+        private void MeasureCroutonView()
         {
-            View view = getView();
+            View view = GetView();
             int widthSpec;
-            if (null != viewGroup)
+            if (null != ViewGroup)
             {
-                widthSpec = View.MeasureSpec.MakeMeasureSpec(viewGroup.MeasuredWidth, MeasureSpecMode.AtMost);
+                widthSpec = View.MeasureSpec.MakeMeasureSpec(ViewGroup.MeasuredWidth, MeasureSpecMode.AtMost);
             }
             else
             {
-                widthSpec = View.MeasureSpec.MakeMeasureSpec(activity.Window.DecorView.MeasuredWidth, MeasureSpecMode.AtMost);
+                widthSpec = View.MeasureSpec.MakeMeasureSpec(Activity.Window.DecorView.MeasuredWidth,
+                    MeasureSpecMode.AtMost);
             }
 
             view.Measure(widthSpec, View.MeasureSpec.MakeMeasureSpec(0, MeasureSpecMode.Unspecified));
         }
 
-        private void initializeCroutonView()
+        private void InitializeCroutonView()
         {
-            Resources resources = this.activity.Resources;
+            Resources resources = Activity.Resources;
 
-            this.croutonView = initializeCroutonViewGroup(resources);
+            CroutonView = InitializeCroutonViewGroup(resources);
 
             // create content view
-            RelativeLayout contentView = initializeContentView(resources);
-            this.croutonView.AddView(contentView);
+            RelativeLayout contentView = InitializeContentView(resources);
+            CroutonView.AddView(contentView);
         }
 
-        private FrameLayout initializeCroutonViewGroup(Resources resources)
+        private FrameLayout InitializeCroutonViewGroup(Resources resources)
         {
-            FrameLayout croutonView = new FrameLayout(this.activity);
+            var croutonView = new FrameLayout(Activity);
 
-            if (null != onClickListener)
+            if (null != OnClickListener)
             {
-                croutonView.SetOnClickListener(onClickListener);
+                croutonView.SetOnClickListener(OnClickListener);
             }
 
             int height;
-            if (this.style.heightDimensionResId > 0)
+            if (Style.HeightDimensionResId > 0)
             {
-                height = resources.GetDimensionPixelSize(this.style.heightDimensionResId);
+                height = resources.GetDimensionPixelSize(Style.HeightDimensionResId);
             }
             else
             {
-                height = this.style.heightInPixels;
+                height = Style.HeightInPixels;
             }
 
             int width;
-            if (this.style.widthDimensionResId > 0)
+            if (Style.WidthDimensionResId > 0)
             {
-                width = resources.GetDimensionPixelSize(this.style.widthDimensionResId);
+                width = resources.GetDimensionPixelSize(Style.WidthDimensionResId);
             }
             else
             {
-                width = this.style.widthInPixels;
+                width = Style.WidthInPixels;
             }
 
-            croutonView.LayoutParameters = new FrameLayout.LayoutParams(width != 0 ? width : FrameLayout.LayoutParams.MatchParent, height);
+            croutonView.LayoutParameters =
+                new FrameLayout.LayoutParams(width != 0 ? width : ViewGroup.LayoutParams.MatchParent, height);
 
             croutonView.SetBackgroundColor(Color.LightGreen);
             // set background
-            //if (this.style.backgroundColorValue != Style.NOT_SET)
+            //if (this.Style.BackgroundColorValue != Style.NOT_SET)
             //{
             //    //TODO: FIX
-            //    //croutonView.SetBackgroundColor(resources.GetColor(this.style.backgroundColorValue));
+            //    //CroutonView.SetBackgroundColor(resources.GetColor(this.Style.BackgroundColorValue));
 
             //}
             //else
             //{
-            //    croutonView.SetBackgroundColor(resources.GetColor(this.style.backgroundColorResourceId));
+            //    CroutonView.SetBackgroundColor(resources.GetColor(this.Style.BackgroundColorResourceId));
             //}
 
             // set the background drawable if set. This will override the background
             // color.
-            if (this.style.backgroundDrawableResourceId != 0)
+            if (Style.BackgroundDrawableResourceId != 0)
             {
-                Bitmap background = BitmapFactory.DecodeResource(resources, this.style.backgroundDrawableResourceId);
-                BitmapDrawable drawable = new BitmapDrawable(resources, background);
-                if (this.style.isTileEnabled)
+                Bitmap background = BitmapFactory.DecodeResource(resources, Style.BackgroundDrawableResourceId);
+                var drawable = new BitmapDrawable(resources, background);
+                if (Style.IsTileEnabled)
                 {
                     drawable.SetTileModeXY(Shader.TileMode.Repeat, Shader.TileMode.Repeat);
                 }
@@ -893,48 +944,49 @@ namespace CroutonLibrary
             return croutonView;
         }
 
-        private RelativeLayout initializeContentView(Resources resources)
+        private RelativeLayout InitializeContentView(Resources resources)
         {
-            RelativeLayout contentView = new RelativeLayout(this.activity);
-            contentView.LayoutParameters = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MatchParent, RelativeLayout.LayoutParams.MatchParent);
+            var contentView = new RelativeLayout(Activity);
+            contentView.LayoutParameters = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent,
+                ViewGroup.LayoutParams.MatchParent);
 
             // set padding
-            int padding = this.style.paddingInPixels;
+            int padding = Style.PaddingInPixels;
 
             // if a padding dimension has been set, this will overwrite any padding
             // in pixels
-            if (this.style.paddingDimensionResId > 0)
+            if (Style.PaddingDimensionResId > 0)
             {
-                padding = resources.GetDimensionPixelSize(this.style.paddingDimensionResId);
+                padding = resources.GetDimensionPixelSize(Style.PaddingDimensionResId);
             }
             contentView.SetPadding(padding, padding, padding, padding);
 
             // only setup image if one is requested
             ImageView image = null;
-            if ((null != this.style.imageDrawable) || (0 != this.style.imageResId))
+            if ((null != Style.ImageDrawable) || (0 != Style.ImageResId))
             {
-                image = initializeImageView();
+                image = InitializeImageView();
                 contentView.AddView(image, image.LayoutParameters);
             }
 
-            TextView text = initializeTextView(resources);
+            TextView text = InitializeTextView(resources);
 
-            RelativeLayout.LayoutParams textParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MatchParent,
-                RelativeLayout.LayoutParams.WrapContent);
+            var textParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent,
+                ViewGroup.LayoutParams.WrapContent);
             if (null != image)
             {
                 textParams.AddRule(LayoutRules.RightOf, image.Id);
             }
 
-            if ((this.style.gravity & (int)GravityFlags.Center) != 0)
+            if ((Style.Gravity & (int) GravityFlags.Center) != 0)
             {
                 textParams.AddRule(LayoutRules.CenterInParent);
             }
-            else if ((this.style.gravity & (int)GravityFlags.CenterVertical) != 0)
+            else if ((Style.Gravity & (int) GravityFlags.CenterVertical) != 0)
             {
                 textParams.AddRule(LayoutRules.CenterVertical);
             }
-            else if ((this.style.gravity & (int)GravityFlags.CenterHorizontal) != 0)
+            else if ((Style.Gravity & (int) GravityFlags.CenterHorizontal) != 0)
             {
                 textParams.AddRule(LayoutRules.CenterHorizontal);
             }
@@ -943,36 +995,36 @@ namespace CroutonLibrary
             return contentView;
         }
 
-        private TextView initializeTextView(Resources resources)
+        private TextView InitializeTextView(Resources resources)
         {
-            TextView text = new TextView(this.activity);
+            var text = new TextView(Activity);
             text.Id = TEXT_ID;
-            if (this.style.fontName != null)
+            if (Style.FontName != null)
             {
-                setTextWithCustomFont(text, this.style.fontName);
+                SetTextWithCustomFont(text, Style.FontName);
             }
-            else if (this.style.fontNameResId != 0)
+            else if (Style.FontNameResId != 0)
             {
-                setTextWithCustomFont(text, resources.GetString(this.style.fontNameResId));
+                SetTextWithCustomFont(text, resources.GetString(Style.FontNameResId));
             }
             else
             {
-                text.Text = this.text;
+                text.Text = Text;
             }
-            text.Gravity = (GravityFlags)this.style.gravity;
+            text.Gravity = (GravityFlags) Style.Gravity;
 
-            // set the text color if set
+            // set the Text color if set
             //TODO: FIX
             try
             {
-                croutonView.SetBackgroundColor(Color.LightGreen);
-                //if (this.style.textColorValue != Style.NOT_SET)
+                CroutonView.SetBackgroundColor(Color.LightGreen);
+                //if (this.Style.TextColorValue != Style.NOT_SET)
                 //{
-                //    text.SetTextColor(this.style.textColorValue);
+                //    Text.SetTextColor(this.Style.TextColorValue);
                 //}
                 //else
                 //{
-                //text.SetTextColor(resources.GetColor(this.style.textColorResourceId));
+                //Text.SetTextColor(resources.GetColor(this.Style.TextColorResourceId));
                 //}
             }
             catch (Exception ex)
@@ -980,70 +1032,72 @@ namespace CroutonLibrary
                 ex.ToString();
             }
 
-            // Set the text size. If the user has set a text size and text
-            // appearance, the text size in the text appearance
+            // Set the Text size. If the user has set a Text size and Text
+            // appearance, the Text size in the Text appearance
             // will override this.
-            if (this.style.textSize != 0)
+            if (Style.TextSize != 0)
             {
-                text.SetTextSize(ComplexUnitType.Sp, this.style.textSize);
+                text.SetTextSize(ComplexUnitType.Sp, Style.TextSize);
             }
 
             // Setup the shadow if requested
-            if (this.style.textShadowColorResId != 0)
+            if (Style.TextShadowColorResId != 0)
             {
-                initializeTextViewShadow(resources, text);
+                InitializeTextViewShadow(resources, text);
             }
 
-            // Set the text appearance
-            if (this.style.textAppearanceResId != 0)
+            // Set the Text appearance
+            if (Style.TextAppearanceResId != 0)
             {
-                text.SetTextAppearance(this.activity, this.style.textAppearanceResId);
+                text.SetTextAppearance(Activity, Style.TextAppearanceResId);
             }
             return text;
         }
 
-        private void setTextWithCustomFont(TextView text, String fontName)
+        private void SetTextWithCustomFont(TextView text, String fontName)
         {
-            if (this.text != null)
+            if (Text != null)
             {
-                SpannableString s = new SpannableString(this.text);
+                var s = new SpannableString(Text);
                 s.SetSpan(new TypefaceSpan(text.Context, fontName), 0, s.Length(), SpanTypes.ExclusiveExclusive);
                 text.Text = s.ToString();
             }
         }
 
-        private void initializeTextViewShadow(Resources resources, TextView text)
+        private void InitializeTextViewShadow(Resources resources, TextView text)
         {
-            float textShadowRadius = this.style.textShadowRadius;
-            float textShadowDx = this.style.textShadowDx;
-            float textShadowDy = this.style.textShadowDy;
-            text.SetShadowLayer(textShadowRadius, textShadowDx, textShadowDy, resources.GetColor(this.style.textShadowColorResId));
+            float textShadowRadius = Style.TextShadowRadius;
+            float textShadowDx = Style.TextShadowDx;
+            float textShadowDy = Style.TextShadowDy;
+            text.SetShadowLayer(textShadowRadius, textShadowDx, textShadowDy,
+                resources.GetColor(Style.TextShadowColorResId));
         }
 
-        private ImageView initializeImageView()
+        private ImageView InitializeImageView()
         {
             ImageView image;
-            image = new ImageView(this.activity);
+            image = new ImageView(Activity);
             image.Id = IMAGE_ID;
             image.SetAdjustViewBounds(true);
-            image.SetScaleType(this.style.imageScaleType);
+            image.SetScaleType(Style.ImageScaleType);
 
             // set the image drawable if not null
-            if (null != this.style.imageDrawable)
+            if (null != Style.ImageDrawable)
             {
-                image.SetImageDrawable(this.style.imageDrawable);
+                image.SetImageDrawable(Style.ImageDrawable);
             }
 
             // set the image resource if not 0. This will overwrite the drawable
             // if both are set
-            if (this.style.imageResId != 0)
+            if (Style.ImageResId != 0)
             {
-                image.SetImageResource(this.style.imageResId);
+                image.SetImageResource(Style.ImageResId);
             }
 
-            RelativeLayout.LayoutParams imageParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WrapContent, RelativeLayout.LayoutParams.WrapContent);
-            imageParams.AddRule(LayoutRules.AlignParentLeft, (int)LayoutRules.True);
-            imageParams.AddRule(LayoutRules.CenterVertical, (int)LayoutRules.True);
+            var imageParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent,
+                ViewGroup.LayoutParams.WrapContent);
+            imageParams.AddRule(LayoutRules.AlignParentLeft, (int) LayoutRules.True);
+            imageParams.AddRule(LayoutRules.CenterVertical, (int) LayoutRules.True);
 
             image.LayoutParameters = imageParams;
 
