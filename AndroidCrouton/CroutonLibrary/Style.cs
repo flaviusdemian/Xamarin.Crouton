@@ -112,16 +112,9 @@ namespace CroutonLibrary
 
         static Style()
         {
-            try
-            {
-                ALERT = new StyleBuilder().setBackgroundColor(Resource.Color.red).build();
-                CONFIRM = new StyleBuilder().setBackgroundColorValue(Resource.Color.green).build();
-                INFO = new StyleBuilder().setBackgroundColorValue(Resource.Color.holo_blue_light).build();
-            }
-            catch (Exception ex)
-            {
-                ex.ToString();
-            }
+            ALERT = new StyleBuilder().SetBackgroundColor(Resource.Color.holo_red_light).Build();
+            CONFIRM = new StyleBuilder().SetBackgroundColorValue(Resource.Color.holo_blue_light).Build();
+            INFO = new StyleBuilder().SetBackgroundColorValue(Resource.Color.holo_blue_light).Build();
         }
 
         /** The text appearance resource id for the text. */

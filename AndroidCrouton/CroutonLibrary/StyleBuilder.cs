@@ -106,7 +106,7 @@ namespace CroutonLibrary
          *
          * @return the {@link Builder}.
          */
-        public StyleBuilder setConfiguration(Configuration configuration)
+        public StyleBuilder SetConfiguration(Configuration configuration)
         {
             this.configuration = configuration;
             return this;
@@ -120,7 +120,7 @@ namespace CroutonLibrary
          *
          * @return the {@link Builder}.
          */
-        public StyleBuilder setBackgroundColor(int backgroundColorResourceId)
+        public StyleBuilder SetBackgroundColor(int backgroundColorResourceId)
         {
             this.backgroundColorResourceId = backgroundColorResourceId;
             return this;
@@ -134,7 +134,7 @@ namespace CroutonLibrary
          *
          * @return the {@link Builder}.
          */
-        public StyleBuilder setBackgroundColorValue(int backgroundColorValue)
+        public StyleBuilder SetBackgroundColorValue(int backgroundColorValue)
         {
             this.backgroundColorValue = backgroundColorValue;
             return this;
@@ -148,7 +148,7 @@ namespace CroutonLibrary
          *
          * @return the {@link Builder}.
          */
-        public StyleBuilder setBackgroundDrawable(int backgroundDrawableResourceId)
+        public StyleBuilder SetBackgroundDrawable(int backgroundDrawableResourceId)
         {
             this.backgroundDrawableResourceId = backgroundDrawableResourceId;
             return this;
@@ -164,7 +164,7 @@ namespace CroutonLibrary
          *
          * @return the {@link Builder}.
          */
-        public StyleBuilder setHeight(int height)
+        public StyleBuilder SetHeight(int height)
         {
             this.heightInPixels = height;
             return this;
@@ -178,7 +178,7 @@ namespace CroutonLibrary
          *
          * @return the {@link Builder}.
          */
-        public StyleBuilder setHeightDimensionResId(int heightDimensionResId)
+        public StyleBuilder SetHeightDimensionResId(int heightDimensionResId)
         {
             this.heightDimensionResId = heightDimensionResId;
             return this;
@@ -194,7 +194,7 @@ namespace CroutonLibrary
          *
          * @return the {@link Builder}.
          */
-        public StyleBuilder setWidth(int width)
+        public StyleBuilder SetWidth(int width)
         {
             this.widthInPixels = width;
             return this;
@@ -208,7 +208,7 @@ namespace CroutonLibrary
          *
          * @return the {@link Builder}.
          */
-        public StyleBuilder setWidthDimensionResId(int widthDimensionResId)
+        public StyleBuilder SetWidthDimensionResId(int widthDimensionResId)
         {
             this.widthDimensionResId = widthDimensionResId;
             return this;
@@ -223,7 +223,7 @@ namespace CroutonLibrary
          *
          * @return the {@link Builder}.
          */
-        public StyleBuilder setTileEnabled(bool isTileEnabled)
+        public StyleBuilder SetTileEnabled(bool isTileEnabled)
         {
             this.isTileEnabled = isTileEnabled;
             return this;
@@ -237,7 +237,7 @@ namespace CroutonLibrary
          *
          * @return the {@link Builder}.
          */
-        public StyleBuilder setTextColor(int textColor)
+        public StyleBuilder SetTextColor(int textColor)
         {
             this.textColorResourceId = textColor;
             return this;
@@ -251,7 +251,7 @@ namespace CroutonLibrary
          *
          * @return the {@link Builder}.
          */
-        public StyleBuilder setTextColorValue(int textColorValue)
+        public StyleBuilder SetTextColorValue(int textColorValue)
         {
             this.textColorValue = textColorValue;
             return this;
@@ -265,7 +265,7 @@ namespace CroutonLibrary
          *
          * @return the {@link Builder}.
          */
-        public StyleBuilder setGravity(int gravity)
+        public StyleBuilder SetGravity(int gravity)
         {
             this.gravity = gravity;
             return this;
@@ -279,7 +279,7 @@ namespace CroutonLibrary
          *
          * @return the {@link Builder}.
          */
-        public StyleBuilder setImageDrawable(Drawable imageDrawable)
+        public StyleBuilder SetImageDrawable(Drawable imageDrawable)
         {
             this.imageDrawable = imageDrawable;
             return this;
@@ -293,91 +293,91 @@ namespace CroutonLibrary
          *
          * @return the {@link Builder}.
          */
-        public StyleBuilder setImageResource(int imageResId)
+        public StyleBuilder SetImageResource(int imageResId)
         {
             this.imageResId = imageResId;
             return this;
         }
 
         /** The text size in sp. */
-        public StyleBuilder setTextSize(int textSize)
+        public StyleBuilder SetTextSize(int textSize)
         {
             this.textSize = textSize;
             return this;
         }
 
         /** The text shadow color resource id. */
-        public StyleBuilder setTextShadowColor(int textShadowColorResId)
+        public StyleBuilder SetTextShadowColor(int textShadowColorResId)
         {
             this.textShadowColorResId = textShadowColorResId;
             return this;
         }
 
         /** The text shadow radius. */
-        public StyleBuilder setTextShadowRadius(float textShadowRadius)
+        public StyleBuilder SetTextShadowRadius(float textShadowRadius)
         {
             this.textShadowRadius = textShadowRadius;
             return this;
         }
 
         /** The text shadow horizontal offset. */
-        public StyleBuilder setTextShadowDx(float textShadowDx)
+        public StyleBuilder SetTextShadowDx(float textShadowDx)
         {
             this.textShadowDx = textShadowDx;
             return this;
         }
 
         /** The text shadow vertical offset. */
-        public StyleBuilder setTextShadowDy(float textShadowDy)
+        public StyleBuilder SetTextShadowDy(float textShadowDy)
         {
             this.textShadowDy = textShadowDy;
             return this;
         }
 
         /** The text appearance resource id for the text. */
-        public StyleBuilder setTextAppearance(int textAppearanceResId)
+        public StyleBuilder SetTextAppearance(int textAppearanceResId)
         {
             this.textAppearanceResId = textAppearanceResId;
             return this;
         }
 
         /** The {@link android.widget.ImageView.ScaleType} for the image. */
-        public StyleBuilder setImageScaleType(ImageView.ScaleType imageScaleType)
+        public StyleBuilder SetImageScaleType(ImageView.ScaleType imageScaleType)
         {
             this.imageScaleType = imageScaleType;
             return this;
         }
 
         /** The padding for the crouton view's content in pixels. */
-        public StyleBuilder setPaddingInPixels(int padding)
+        public StyleBuilder SetPaddingInPixels(int padding)
         {
             this.paddingInPixels = padding;
             return this;
         }
 
         /** The resource id for the padding for the crouton view's content. */
-        public StyleBuilder setPaddingDimensionResId(int paddingResId)
+        public StyleBuilder SetPaddingDimensionResId(int paddingResId)
         {
             this.paddingDimensionResId = paddingResId;
             return this;
         }
 
         /** The file path and name of the font for the crouton view's content. */
-        public StyleBuilder setFontName(String fontName)
+        public StyleBuilder SetFontName(String fontName)
         {
             this.fontName = fontName;
             return this;
         }
 
         /** The resource id for the file path and name of the font for the crouton view's content. */
-        public StyleBuilder setFontNameResId(int fontNameResId)
+        public StyleBuilder SetFontNameResId(int fontNameResId)
         {
             this.fontNameResId = fontNameResId;
             return this;
         }
 
         /** @return a configured {@link Style} object. */
-        public Style build()
+        public Style Build()
         {
             return new Style(this);
         }

@@ -30,7 +30,7 @@ namespace CroutonLibrary
          *
          * @return the {@link Builder}.
          */
-        public ConfigurationBuilder setDuration(int duration)
+        public ConfigurationBuilder SetDuration(int duration)
         {
             this.durationInMilliseconds = duration;
 
@@ -46,7 +46,7 @@ namespace CroutonLibrary
          *
          * @return the {@link Builder}.
          */
-        public ConfigurationBuilder setInAnimation(int inAnimationResId)
+        public ConfigurationBuilder SetInAnimation(int inAnimationResId)
         {
             this.inAnimationResId = inAnimationResId;
 
@@ -62,7 +62,7 @@ namespace CroutonLibrary
          *
          * @return the {@link Builder}.
          */
-        public ConfigurationBuilder setOutAnimation(int outAnimationResId)
+        public ConfigurationBuilder SetOutAnimation(int outAnimationResId)
         {
             this.outAnimationResId = outAnimationResId;
 
@@ -74,7 +74,7 @@ namespace CroutonLibrary
          *
          * @return The built {@link Configuration}.
          */
-        public Configuration build()
+        public Configuration Build()
         {
             return new Configuration(this);
         }

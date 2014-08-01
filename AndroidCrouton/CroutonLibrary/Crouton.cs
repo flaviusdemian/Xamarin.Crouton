@@ -8,6 +8,7 @@ using Android.Views;
 using Android.Views.Animations;
 using Android.Widget;
 using Java.Lang;
+using Exception = System.Exception;
 using String = System.String;
 
 namespace CroutonLibrary
@@ -100,7 +101,7 @@ namespace CroutonLibrary
             this.activity = activity;
             this.viewGroup = null;
             this.customView = customView;
-            this.style = new StyleBuilder().build();
+            this.style = new StyleBuilder().Build();
             this.text = null;
         }
 
@@ -142,7 +143,7 @@ namespace CroutonLibrary
             this.activity = activity;
             this.customView = customView;
             this.viewGroup = viewGroup;
-            this.style = new StyleBuilder().build();
+            this.style = new StyleBuilder().Build();
             this.text = null;
             this.configuration = configuration;
         }
@@ -354,7 +355,7 @@ namespace CroutonLibrary
          */
         public static void showText(Activity activity, String text, Style style)
         {
-            makeText(activity, text, style).show();
+            makeText(activity, text, style).Show();
         }
 
         /**
@@ -372,7 +373,7 @@ namespace CroutonLibrary
          */
         public static void showText(Activity activity, String text, Style style, ViewGroup viewGroup)
         {
-            makeText(activity, text, style, viewGroup).show();
+            makeText(activity, text, style, viewGroup).Show();
         }
 
         /**
@@ -390,7 +391,7 @@ namespace CroutonLibrary
          */
         public static void showText(Activity activity, String text, Style style, int viewGroupResId)
         {
-            makeText(activity, text, style, activity.FindViewById<ViewGroup>(viewGroupResId)).show();
+            makeText(activity, text, style, activity.FindViewById<ViewGroup>(viewGroupResId)).Show();
         }
 
         /**
@@ -410,7 +411,7 @@ namespace CroutonLibrary
          */
         public static void showText(Activity activity, String text, Style style, int viewGroupResId, Configuration configuration)
         {
-            makeText(activity, text, style, activity.FindViewById<ViewGroup>(viewGroupResId)).setConfiguration(configuration).show();
+            makeText(activity, text, style, activity.FindViewById<ViewGroup>(viewGroupResId)).SetConfiguration(configuration).Show();
         }
 
 
@@ -424,9 +425,9 @@ namespace CroutonLibrary
          * @param customView
          *     The custom {@link View} to display
          */
-        public static void show(Activity activity, View customView)
+        public static void Show(Activity activity, View customView)
         {
-            make(activity, customView).show();
+            make(activity, customView).Show();
         }
 
         /**
@@ -440,9 +441,9 @@ namespace CroutonLibrary
          * @param viewGroup
          *     The {@link ViewGroup} that this {@link Crouton} should be added to.
          */
-        public static void show(Activity activity, View customView, ViewGroup viewGroup)
+        public static void Show(Activity activity, View customView, ViewGroup viewGroup)
         {
-            make(activity, customView, viewGroup).show();
+            make(activity, customView, viewGroup).Show();
         }
 
         /**
@@ -456,9 +457,9 @@ namespace CroutonLibrary
          * @param viewGroupResId
          *     The resource id of the {@link ViewGroup} that this {@link Crouton} should be added to.
          */
-        public static void show(Activity activity, View customView, int viewGroupResId)
+        public static void Show(Activity activity, View customView, int viewGroupResId)
         {
-            make(activity, customView, viewGroupResId).show();
+            make(activity, customView, viewGroupResId).Show();
         }
 
         /**
@@ -531,7 +532,7 @@ namespace CroutonLibrary
          */
         public static void cancelAllCroutons()
         {
-            Manager.getInstance().clearCroutonQueue();
+            Manager.getInstance().ClearCroutonQueue();
         }
 
         /**
@@ -543,7 +544,7 @@ namespace CroutonLibrary
          */
         public static void clearCroutonsForActivity(Activity activity)
         {
-            Manager.getInstance().clearCroutonsForActivity(activity);
+            Manager.getInstance().ClearCroutonsForActivity(activity);
         }
 
         /**
@@ -552,14 +553,14 @@ namespace CroutonLibrary
         public void cancel()
         {
             Manager manager = Manager.getInstance();
-            manager.removeCroutonImmediately(this);
+            manager.RemoveCroutonImmediately(this);
         }
 
         /**
          * Displays the {@link Crouton}. If there's another {@link Crouton} visible at
          * the time, this {@link Crouton} will be displayed afterwards.
          */
-        public void show()
+        public void Show()
         {
             Manager.getInstance().add(this);
         }
@@ -615,7 +616,7 @@ namespace CroutonLibrary
          */
         public void hide()
         {
-            Manager.getInstance().removeCrouton(this);
+            Manager.getInstance().RemoveCrouton(this);
         }
 
         /**
@@ -626,7 +627,7 @@ namespace CroutonLibrary
          *
          * @return this {@link Crouton}.
          */
-        public Crouton setOnClickListener(View.IOnClickListener onClickListener)
+        public Crouton SetOnClickListener(View.IOnClickListener onClickListener)
         {
             this.onClickListener = onClickListener;
             return this;
@@ -640,7 +641,7 @@ namespace CroutonLibrary
          *
          * @return this {@link Crouton}.
          */
-        public Crouton setConfiguration(Configuration configuration)
+        public Crouton SetConfiguration(Configuration configuration)
         {
             this.configuration = configuration;
             return this;
@@ -864,17 +865,13 @@ namespace CroutonLibrary
 
             croutonView.LayoutParameters = new FrameLayout.LayoutParams(width != 0 ? width : FrameLayout.LayoutParams.MatchParent, height);
 
+            croutonView.SetBackgroundColor(Color.LightGreen);
             // set background
-            if (this.style.backgroundColorValue != Style.NOT_SET)
-            {
-            }
-            else
-            {
-                
-            }
-            //TODO: FIX
-            //croutonView.SetBackgroundColor(resources.GetColor(this.style.backgroundColorValue));
-            croutonView.SetBackgroundColor(new Color(230, 21, 21)); //red
+            //if (this.style.backgroundColorValue != Style.NOT_SET)
+            //{
+            //    //TODO: FIX
+            //    //croutonView.SetBackgroundColor(resources.GetColor(this.style.backgroundColorValue));
+
             //}
             //else
             //{
@@ -965,23 +962,23 @@ namespace CroutonLibrary
             text.Gravity = (GravityFlags)this.style.gravity;
 
             // set the text color if set
-            if (this.style.textColorValue != Style.NOT_SET)
+            //TODO: FIX
+            try
             {
-
+                croutonView.SetBackgroundColor(Color.LightGreen);
+                //if (this.style.textColorValue != Style.NOT_SET)
+                //{
+                //    text.SetTextColor(this.style.textColorValue);
+                //}
+                //else
+                //{
+                //text.SetTextColor(resources.GetColor(this.style.textColorResourceId));
+                //}
             }
-            else
+            catch (Exception ex)
             {
-                
+                ex.ToString();
             }
-            //{
-            //    //TODO: FIX
-            //    //text.SetTextColor(resources.GetColor(this.style.textColorValue));
-            croutonView.SetBackgroundColor(new Color(97, 225, 32)); //green
-            //}
-            //else if (this.style.textColorResourceId != 0)
-            //{
-            //    text.SetTextColor(resources.GetColor(this.style.textColorResourceId));
-            //}
 
             // Set the text size. If the user has set a text size and text
             // appearance, the text size in the text appearance

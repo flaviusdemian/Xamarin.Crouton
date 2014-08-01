@@ -25,7 +25,7 @@ namespace CroutonLibrary
 
         static Configuration()
         {
-            DEFAULT = new ConfigurationBuilder().setDuration(DURATION_SHORT).build();
+            DEFAULT = new ConfigurationBuilder().SetDuration(DURATION_SHORT).Build();
         }
 
         public Configuration(ConfigurationBuilder builder)

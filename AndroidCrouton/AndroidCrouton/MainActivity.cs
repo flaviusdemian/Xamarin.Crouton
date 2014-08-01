@@ -10,7 +10,7 @@ using CroutonLibrary;
 
 namespace AndroidCrouton
 {
-    [Activity(Label = "Crouton Sample", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Crouton Sample", MainLauncher = false, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
         protected override void OnCreate(Bundle bundle)
@@ -28,7 +28,7 @@ namespace AndroidCrouton
             {
                 try
                 { 
-                Crouton.makeText(this, "Ana are mere", Style.INFO).show();
+                Crouton.makeText(this, "Ana are mere", Style.INFO).Show();
                 }
                 catch (Exception ex)
                 {

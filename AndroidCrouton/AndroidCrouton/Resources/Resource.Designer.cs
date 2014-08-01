@@ -28,6 +28,22 @@ namespace AndroidCrouton
 		{
 		}
 		
+		public partial class Array
+		{
+			
+			// aapt resource value: 0x7f060000
+			public const int style = 2131099648;
+			
+			static Array()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Array()
+			{
+			}
+		}
+		
 		public partial class Attribute
 		{
 			
@@ -41,14 +57,33 @@ namespace AndroidCrouton
 			}
 		}
 		
+		public partial class Dimension
+		{
+			
+			// aapt resource value: 0x7f040000
+			public const int padding_default = 2130968576;
+			
+			static Dimension()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Dimension()
+			{
+			}
+		}
+		
 		public partial class Drawable
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int Icon = 2130837504;
+			public const int ic_launcher = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int monoandroidsplash = 2130837505;
+			public const int Icon = 2130837505;
+			
+			// aapt resource value: 0x7f020002
+			public const int monoandroidsplash = 2130837506;
 			
 			static Drawable()
 			{
@@ -63,8 +98,29 @@ namespace AndroidCrouton
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060000
-			public const int MyButton = 2131099648;
+			// aapt resource value: 0x7f080007
+			public const int MyButton = 2131230727;
+			
+			// aapt resource value: 0x7f080006
+			public const int alternate_view_group = 2131230726;
+			
+			// aapt resource value: 0x7f080004
+			public const int button_show = 2131230724;
+			
+			// aapt resource value: 0x7f080000
+			public const int crouton_layout = 2131230720;
+			
+			// aapt resource value: 0x7f080005
+			public const int display_on_top = 2131230725;
+			
+			// aapt resource value: 0x7f080003
+			public const int edit_text_duration = 2131230723;
+			
+			// aapt resource value: 0x7f080002
+			public const int edit_text_text = 2131230722;
+			
+			// aapt resource value: 0x7f080001
+			public const int spinner_style = 2131230721;
 			
 			static Id()
 			{
@@ -80,7 +136,13 @@ namespace AndroidCrouton
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int Main = 2130903040;
+			public const int crouton_custom_view = 2130903040;
+			
+			// aapt resource value: 0x7f030001
+			public const int crouton_demo = 2130903041;
+			
+			// aapt resource value: 0x7f030002
+			public const int Main = 2130903042;
 			
 			static Layout()
 			{
@@ -95,11 +157,65 @@ namespace AndroidCrouton
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f040001
-			public const int ApplicationName = 2130968577;
+			// aapt resource value: 0x7f050001
+			public const int ApplicationName = 2131034113;
 			
-			// aapt resource value: 0x7f040000
-			public const int Hello = 2130968576;
+			// aapt resource value: 0x7f050000
+			public const int Hello = 2131034112;
+			
+			// aapt resource value: 0x7f05000a
+			public const int about = 2131034122;
+			
+			// aapt resource value: 0x7f050002
+			public const int app_name = 2131034114;
+			
+			// aapt resource value: 0x7f050010
+			public const int attributions = 2131034128;
+			
+			// aapt resource value: 0x7f050003
+			public const int button_show = 2131034115;
+			
+			// aapt resource value: 0x7f05000d
+			public const int credits = 2131034125;
+			
+			// aapt resource value: 0x7f050009
+			public const int crouton = 2131034121;
+			
+			// aapt resource value: 0x7f050013
+			public const int custom_message = 2131034131;
+			
+			// aapt resource value: 0x7f050012
+			public const int custom_title = 2131034130;
+			
+			// aapt resource value: 0x7f05000e
+			public const int disclaimer = 2131034126;
+			
+			// aapt resource value: 0x7f050008
+			public const int display_on_top = 2131034120;
+			
+			// aapt resource value: 0x7f05000f
+			public const int feedback = 2131034127;
+			
+			// aapt resource value: 0x7f05000c
+			public const int gplus_url = 2131034124;
+			
+			// aapt resource value: 0x7f050004
+			public const int hint_duration = 2131034116;
+			
+			// aapt resource value: 0x7f050005
+			public const int hint_text = 2131034117;
+			
+			// aapt resource value: 0x7f050011
+			public const int infinity_text = 2131034129;
+			
+			// aapt resource value: 0x7f05000b
+			public const int repo_url = 2131034123;
+			
+			// aapt resource value: 0x7f050006
+			public const int text_demo = 2131034118;
+			
+			// aapt resource value: 0x7f050007
+			public const int warning_duration = 2131034119;
 			
 			static String()
 			{
@@ -114,8 +230,8 @@ namespace AndroidCrouton
 		public partial class Style
 		{
 			
-			// aapt resource value: 0x7f050000
-			public const int Mono_Android_Theme_Splash = 2131034112;
+			// aapt resource value: 0x7f070000
+			public const int Mono_Android_Theme_Splash = 2131165184;
 			
 			static Style()
 			{
