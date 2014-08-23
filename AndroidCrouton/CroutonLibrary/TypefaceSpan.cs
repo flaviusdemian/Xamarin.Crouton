@@ -1,23 +1,12 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
+using System;
 using Android.Content;
 using Android.Graphics;
-using Android.OS;
-using Android.Runtime;
 using Android.Text;
 using Android.Text.Style;
 using Android.Util;
-using Android.Views;
-using Android.Widget;
-using Java.Lang;
-using String = System.String;
 
 namespace CroutonLibrary
 {
-
     /*
      * Copyright 2012 - 2014 Benjamin Weiss
      *
@@ -45,24 +34,25 @@ namespace CroutonLibrary
     /**
      * Style a spannable with a custom {@link Typeface}.
      */
+
     public class TypefaceSpan : MetricAffectingSpan
     {
         /** An <code>LruCache</code> for previously loaded typefaces. */
-        private static LruCache sTypefaceCache = new LruCache(5);
+        private static readonly LruCache sTypefaceCache = new LruCache(5);
 
-        private Typeface mTypeface;
+        private readonly Typeface mTypeface;
 
         /**
          * Load the {@link Typeface} and apply to a spannable.
          */
+
         public TypefaceSpan(Context context, String typefaceName)
         {
-            mTypeface = (Typeface)sTypefaceCache.Get(typefaceName);
+            mTypeface = (Typeface) sTypefaceCache.Get(typefaceName);
 
             if (mTypeface == null)
             {
                 mTypeface = Typeface.CreateFromAsset(context.ApplicationContext.Assets, String.Format("{0}", typefaceName));
-
                 // Cache the loaded Typeface
                 sTypefaceCache.Put(typefaceName, mTypeface);
             }

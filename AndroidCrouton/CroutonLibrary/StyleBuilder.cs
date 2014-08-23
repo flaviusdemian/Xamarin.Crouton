@@ -1,5 +1,5 @@
-//using Android.Views;
 using System;
+using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Views;
 using Android.Widget;
@@ -10,8 +10,7 @@ namespace CroutonLibrary
 
     public class StyleBuilder
     {
-        public int BackgroundColorResourceId;
-        public int BackgroundColorValue;
+        public Color BackgroundColor;
         public int BackgroundDrawableResourceId;
         public Configuration Configuration;
         public String FontName;
@@ -27,7 +26,7 @@ namespace CroutonLibrary
         public int PaddingInPixels;
         public int TextAppearanceResId;
         public int TextColorResourceId;
-        public int TextColorValue;
+        public Color TextColor;
         public int TextShadowColorResId;
         public float TextShadowDx;
         public float TextShadowDy;
@@ -41,12 +40,11 @@ namespace CroutonLibrary
         {
             Configuration = Configuration.DEFAULT;
             PaddingInPixels = 10;
-            BackgroundColorResourceId = Resource.Color.holo_blue_light;
+            BackgroundColor = Color.Blue;
             BackgroundDrawableResourceId = 0;
-            BackgroundColorValue = Style.NOT_SET;
             IsTileEnabled = false;
             TextColorResourceId = Resource.Color.white;
-            TextColorValue = Style.NOT_SET;
+            TextColor= Color.Black;
             HeightInPixels = ViewGroup.LayoutParams.WrapContent;
             WidthInPixels = ViewGroup.LayoutParams.MatchParent;
             Gravity = (int) GravityFlags.Center;
@@ -67,12 +65,11 @@ namespace CroutonLibrary
         public StyleBuilder(Style baseStyle)
         {
             Configuration = baseStyle.Configuration;
-            BackgroundColorValue = baseStyle.BackgroundColorValue;
-            BackgroundColorResourceId = baseStyle.BackgroundColorResourceId;
+            BackgroundColor = baseStyle.BackgroundColor;
             BackgroundDrawableResourceId = baseStyle.BackgroundDrawableResourceId;
             IsTileEnabled = baseStyle.IsTileEnabled;
             TextColorResourceId = baseStyle.TextColorResourceId;
-            TextColorValue = baseStyle.TextColorValue;
+            TextColor = baseStyle.TextColor;
             HeightInPixels = baseStyle.HeightInPixels;
             HeightDimensionResId = baseStyle.HeightDimensionResId;
             WidthInPixels = baseStyle.WidthInPixels;
@@ -117,24 +114,9 @@ namespace CroutonLibrary
          * @return the {@link Builder}.
          */
 
-        public StyleBuilder SetBackgroundColor(int backgroundColorResourceId)
+        public StyleBuilder SetBackgroundColor(Color backgroundColorResourceId)
         {
-            BackgroundColorResourceId = backgroundColorResourceId;
-            return this;
-        }
-
-        /**
-         * Set the backgroundColorResourceValue option of the {@link Crouton}.
-         *
-         * @param BackgroundColorValue
-         *   The backgroundColorResourceValue's e.g. 0xffff4444;
-         *
-         * @return the {@link Builder}.
-         */
-
-        public StyleBuilder SetBackgroundColorValue(int backgroundColorValue)
-        {
-            BackgroundColorValue = backgroundColorValue;
+            BackgroundColor = backgroundColorResourceId;
             return this;
         }
 
@@ -257,9 +239,9 @@ namespace CroutonLibrary
          * @return the {@link Builder}.
          */
 
-        public StyleBuilder SetTextColorValue(int textColorValue)
+        public StyleBuilder SetTextColor(Color textColorValue)
         {
-            TextColorValue = textColorValue;
+            TextColor = textColorValue;
             return this;
         }
 

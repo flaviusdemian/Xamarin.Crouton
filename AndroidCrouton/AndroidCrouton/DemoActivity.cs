@@ -16,14 +16,14 @@ namespace AndroidCrouton
     public class DemoActivity : Activity, AdapterView.IOnItemSelectedListener, View.IOnClickListener
     {
 
-        private static Style INFINITE = new StyleBuilder().SetBackgroundColor(Color.DarkCyan).Build();
+        private static Style INFINITE = new StyleBuilder().SetBackgroundColor(Color.LightYellow).Build();
         private static Configuration CONFIGURATION_INFINITE = new ConfigurationBuilder().SetDuration(Configuration.DURATION_INFINITE).Build();
 
-        private CheckBox displayOnTop;
-        private Spinner styleSpinner;
-        private EditText croutonTextEdit;
-        private EditText croutonDurationEdit;
-        private Crouton infiniteCrouton;
+        private CheckBox DisplayOnTop;
+        private Spinner StyleSpinner;
+        private EditText CroutonTextEdit;
+        private EditText CroutonDurationEdit;
+        private Crouton InfiniteCrouton;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -33,11 +33,11 @@ namespace AndroidCrouton
             SetContentView(Resource.Layout.crouton_demo);
 
             FindViewById<Button>(Resource.Id.button_show).SetOnClickListener(this);
-            croutonTextEdit = FindViewById<EditText>(Resource.Id.edit_text_text);
-            croutonDurationEdit = FindViewById<EditText>(Resource.Id.edit_text_duration);
-            styleSpinner = FindViewById<Spinner>(Resource.Id.spinner_style);
-            styleSpinner.OnItemSelectedListener = this;
-            displayOnTop = FindViewById<CheckBox>(Resource.Id.display_on_top);
+            CroutonTextEdit = FindViewById<EditText>(Resource.Id.edit_text_text);
+            CroutonDurationEdit = FindViewById<EditText>(Resource.Id.edit_text_duration);
+            StyleSpinner = FindViewById<Spinner>(Resource.Id.spinner_style);
+            StyleSpinner.OnItemSelectedListener = this;
+            DisplayOnTop = FindViewById<CheckBox>(Resource.Id.display_on_top);
         }
 
         public void OnItemSelected(AdapterView parent, View view, int position, long id)
@@ -47,22 +47,22 @@ namespace AndroidCrouton
 
                 case 4:
                     { // Custom Style
-                        croutonTextEdit.Visibility = ViewStates.Visible;
-                        croutonDurationEdit.Visibility = ViewStates.Visible;
+                        CroutonTextEdit.Visibility = ViewStates.Visible;
+                        CroutonDurationEdit.Visibility = ViewStates.Visible;
                         break;
                     }
 
                 case 5:
                     { // Custom View
-                        croutonTextEdit.Visibility = ViewStates.Gone;
-                        croutonDurationEdit.Visibility = ViewStates.Gone;
+                        CroutonTextEdit.Visibility = ViewStates.Gone;
+                        CroutonDurationEdit.Visibility = ViewStates.Gone;
                         break;
                     }
 
                 default:
                     {
-                        croutonTextEdit.Visibility = ViewStates.Visible;
-                        croutonDurationEdit.Visibility = ViewStates.Gone;
+                        CroutonTextEdit.Visibility = ViewStates.Visible;
+                        CroutonDurationEdit.Visibility = ViewStates.Gone;
                         break;
                     }
             }
@@ -85,10 +85,10 @@ namespace AndroidCrouton
 
                 default:
                     {
-                        if (infiniteCrouton != null)
+                        if (InfiniteCrouton != null)
                         {
-                            Crouton.Hide(infiniteCrouton);
-                            infiniteCrouton = null;
+                            Crouton.Hide(InfiniteCrouton);
+                            InfiniteCrouton = null;
                         }
                         break;
                     }
@@ -111,7 +111,7 @@ namespace AndroidCrouton
 
         private Style GetSelectedStyleFromSpinner()
         {
-            switch ((int)styleSpinner.SelectedItemId)
+            switch ((int)StyleSpinner.SelectedItemId)
             {
                 case 0:
                     {
@@ -142,7 +142,7 @@ namespace AndroidCrouton
 
         private String GetCroutonText()
         {
-            String croutonText = croutonTextEdit.Text.ToString().Trim();
+            String croutonText = CroutonTextEdit.Text.ToString().Trim();
 
             if (TextUtils.IsEmpty(croutonText))
             {
@@ -159,7 +159,7 @@ namespace AndroidCrouton
 
         private void ShowAdvancedCrouton()
         {
-            switch (styleSpinner.SelectedItemPosition)
+            switch (StyleSpinner.SelectedItemPosition)
             {
                 case 4:
                     {
@@ -198,7 +198,7 @@ namespace AndroidCrouton
         {
             View view = LayoutInflater.Inflate(Resource.Layout.crouton_custom_view, null);
             Crouton crouton;
-            if (displayOnTop.Checked)
+            if (DisplayOnTop.Checked)
             {
                 crouton = Crouton.Make(this, view);
             }
@@ -211,7 +211,7 @@ namespace AndroidCrouton
 
         private String GetCroutonDurationString()
         {
-            return croutonDurationEdit.Text.ToString().Trim();
+            return CroutonDurationEdit.Text.ToString().Trim();
         }
 
         private void ShowCrouton(String croutonText, Style croutonStyle, Configuration configuration)
@@ -224,7 +224,9 @@ namespace AndroidCrouton
             }
 
             Crouton crouton;
-            if (displayOnTop.Checked)
+            //croutonStyle.BackgroundColor = Color.Red;
+            //croutonStyle.TextColor = Color.Black;
+            if (DisplayOnTop.Checked)
             {
                 crouton = Crouton.MakeText(this, croutonText, croutonStyle);
             }
@@ -234,7 +236,7 @@ namespace AndroidCrouton
             }
             if (infinite)
             {
-                infiniteCrouton = crouton;
+                InfiniteCrouton = crouton;
             }
             crouton.SetOnClickListener(this).SetConfiguration(infinite ? CONFIGURATION_INFINITE : configuration).Show();
         }

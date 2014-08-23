@@ -15,11 +15,11 @@ namespace CroutonLibrary
         }
 
         /**
-   * @param croutonView
-   *   The croutonView which gets animated.
-   *
-   * @return The default Animation for a showing {@link Crouton}.
-   */
+       * @param croutonView
+       *   The croutonView which gets animated.
+       *
+       * @return The default Animation for a showing {@link Crouton}.
+       */
 
         public static Animation BuildDefaultSlideInDownAnimation(View croutonView)
         {
@@ -36,11 +36,11 @@ namespace CroutonLibrary
         }
 
         /**
-   * @param croutonView
-   *   The croutonView which gets animated.
-   *
-   * @return The default Animation for a hiding {@link Crouton}.
-   */
+       * @param croutonView
+       *   The croutonView which gets animated.
+       *
+       * @return The default Animation for a hiding {@link Crouton}.
+       */
 
         public static Animation BuildDefaultSlideOutUpAnimation(View croutonView)
         {

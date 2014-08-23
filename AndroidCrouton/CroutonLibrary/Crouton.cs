@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using Android.App;
 using Android.Content.Res;
 using Android.Graphics;
@@ -26,7 +27,7 @@ namespace CroutonLibrary
         private Configuration Configuration;
         private FrameLayout CroutonView;
         private Animation InAnimation;
-        private LifecycleCallback LifecycleCallback;
+        private ILifecycleCallback LifecycleCallback;
         private View.IOnClickListener OnClickListener;
         private Animation OutAnimation;
         private ViewGroup ViewGroup;
@@ -562,7 +563,7 @@ namespace CroutonLibrary
 
         public static void CancelAllCroutons()
         {
-            Manager.getInstance().ClearCroutonQueue();
+            Manager.GetInstance().ClearCroutonQueue();
         }
 
         /**
@@ -575,7 +576,7 @@ namespace CroutonLibrary
 
         public static void ClearCroutonsForActivity(Activity activity)
         {
-            Manager.getInstance().ClearCroutonsForActivity(activity);
+            Manager.GetInstance().ClearCroutonsForActivity(activity);
         }
 
         /**
@@ -584,7 +585,7 @@ namespace CroutonLibrary
 
         public void Cancel()
         {
-            Manager manager = Manager.getInstance();
+            Manager manager = Manager.GetInstance();
             manager.RemoveCroutonImmediately(this);
         }
 
@@ -595,7 +596,7 @@ namespace CroutonLibrary
 
         public void Show()
         {
-            Manager.getInstance().add(this);
+            Manager.GetInstance().Add(this);
         }
 
         public Animation GetInAnimation()
@@ -634,11 +635,11 @@ namespace CroutonLibrary
         }
 
         /**
-         * @param LifecycleCallback
+         * @param ILifecycleCallback
          *     Callback object for notable events in the life of a Crouton.
          */
 
-        public void SetLifecycleCallback(LifecycleCallback lifecycleCallback)
+        public void SetLifecycleCallback(ILifecycleCallback lifecycleCallback)
         {
             LifecycleCallback = lifecycleCallback;
         }
@@ -651,7 +652,7 @@ namespace CroutonLibrary
 
         public void Hide()
         {
-            Manager.getInstance().RemoveCrouton(this);
+            Manager.GetInstance().RemoveCrouton(this);
         }
 
         /**
@@ -697,7 +698,7 @@ namespace CroutonLibrary
                    ", CroutonView=" + CroutonView +
                    ", InAnimation=" + InAnimation +
                    ", OutAnimation=" + OutAnimation +
-                   ", LifecycleCallback=" + LifecycleCallback +
+                   ", ILifecycleCallback=" + LifecycleCallback +
                    '}';
         }
 
@@ -769,7 +770,7 @@ namespace CroutonLibrary
         }
 
         /**
-         * Removes the LifecycleCallback reference this {@link Crouton} is holding
+         * Removes the ILifecycleCallback reference this {@link Crouton} is holding
          */
 
         public void DetachLifecycleCallback()
@@ -778,10 +779,10 @@ namespace CroutonLibrary
         }
 
         /**
-         * @return the LifecycleCallback
+         * @return the ILifecycleCallback
          */
 
-        public LifecycleCallback GetLifecycleCallback()
+        public ILifecycleCallback GetLifecycleCallback()
         {
             return LifecycleCallback;
         }
@@ -913,21 +914,10 @@ namespace CroutonLibrary
                 width = Style.WidthInPixels;
             }
 
-            croutonView.LayoutParameters =
-                new FrameLayout.LayoutParams(width != 0 ? width : ViewGroup.LayoutParams.MatchParent, height);
+            croutonView.LayoutParameters = new FrameLayout.LayoutParams(width != 0 ? width : ViewGroup.LayoutParams.MatchParent, height);
 
-            croutonView.SetBackgroundColor(Color.LightGreen);
-            // set background
-            //if (this.Style.BackgroundColorValue != Style.NOT_SET)
-            //{
-            //    //TODO: FIX
-            //    //CroutonView.SetBackgroundColor(resources.GetColor(this.Style.BackgroundColorValue));
-
-            //}
-            //else
-            //{
-            //    CroutonView.SetBackgroundColor(resources.GetColor(this.Style.BackgroundColorResourceId));
-            //}
+            //TODO: THIS WAS THE FIX 
+            croutonView.SetBackgroundColor(this.Style.BackgroundColor);
 
             // set the background drawable if set. This will override the background
             // color.
@@ -978,15 +968,15 @@ namespace CroutonLibrary
                 textParams.AddRule(LayoutRules.RightOf, image.Id);
             }
 
-            if ((Style.Gravity & (int) GravityFlags.Center) != 0)
+            if ((Style.Gravity & (int)GravityFlags.Center) != 0)
             {
                 textParams.AddRule(LayoutRules.CenterInParent);
             }
-            else if ((Style.Gravity & (int) GravityFlags.CenterVertical) != 0)
+            else if ((Style.Gravity & (int)GravityFlags.CenterVertical) != 0)
             {
                 textParams.AddRule(LayoutRules.CenterVertical);
             }
-            else if ((Style.Gravity & (int) GravityFlags.CenterHorizontal) != 0)
+            else if ((Style.Gravity & (int)GravityFlags.CenterHorizontal) != 0)
             {
                 textParams.AddRule(LayoutRules.CenterHorizontal);
             }
@@ -1011,26 +1001,10 @@ namespace CroutonLibrary
             {
                 text.Text = Text;
             }
-            text.Gravity = (GravityFlags) Style.Gravity;
+            text.Gravity = (GravityFlags)Style.Gravity;
 
-            // set the Text color if set
-            //TODO: FIX
-            try
-            {
-                CroutonView.SetBackgroundColor(Color.LightGreen);
-                //if (this.Style.TextColorValue != Style.NOT_SET)
-                //{
-                //    Text.SetTextColor(this.Style.TextColorValue);
-                //}
-                //else
-                //{
-                //Text.SetTextColor(resources.GetColor(this.Style.TextColorResourceId));
-                //}
-            }
-            catch (Exception ex)
-            {
-                ex.ToString();
-            }
+            //TODO: THIS WAS THE FIX
+            text.SetTextColor(this.Style.TextColor);
 
             // Set the Text size. If the user has set a Text size and Text
             // appearance, the Text size in the Text appearance
@@ -1096,8 +1070,8 @@ namespace CroutonLibrary
 
             var imageParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent,
                 ViewGroup.LayoutParams.WrapContent);
-            imageParams.AddRule(LayoutRules.AlignParentLeft, (int) LayoutRules.True);
-            imageParams.AddRule(LayoutRules.CenterVertical, (int) LayoutRules.True);
+            imageParams.AddRule(LayoutRules.AlignParentLeft, (int)LayoutRules.True);
+            imageParams.AddRule(LayoutRules.CenterVertical, (int)LayoutRules.True);
 
             image.LayoutParameters = imageParams;
 

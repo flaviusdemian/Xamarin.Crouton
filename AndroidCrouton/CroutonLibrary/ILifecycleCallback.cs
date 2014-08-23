@@ -1,6 +1,6 @@
 namespace CroutonLibrary
 {
-    public interface LifecycleCallback
+    public interface ILifecycleCallback
     {
         /** Will be called when your Crouton has been displayed. */
         void OnDisplayed();

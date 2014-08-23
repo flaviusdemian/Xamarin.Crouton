@@ -62,7 +62,7 @@
     <Compile Include="Configuration.cs" />
     <Compile Include="ConfigurationBuilder.cs" />
     <Compile Include="Crouton.cs" />
-    <Compile Include="LifecycleCallback.cs" />
+    <Compile Include="ILifecycleCallback.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
