@@ -76,7 +76,7 @@ Crouton.makeText(Activity, int, Style, ViewGroup).show();
 <h2>
 <a name="user-content-extension-and-modification" class="anchor" href="#extension-and-modification" aria-hidden="true"><span class="octicon octicon-link"></span></a>Extension and Modification</h2>
 
-<p>The whole design of a Crouton is defined by  <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/main/java/de/keyboardsurfer/android/widget/crouton/Style.java">Style</a>.</p>
+<p>The whole design of a Crouton is defined by  <a href="https://github.com/slown1/Xamarin.Crouton/blob/master/AndroidCrouton/CroutonLibrary/Style.cs">Style</a>.</p>
 
 <p>You can use one of the styles Crouton ships with: <strong>Style.ALERT</strong>, <strong>Style.CONFIRM</strong> and <strong>Style.INFO</strong>. Or you can create your own Style.</p>
 
