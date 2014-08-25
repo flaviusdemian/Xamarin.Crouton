@@ -109,17 +109,6 @@ Crouton.makeText(Activity, int, Style, ViewGroup).show();
 <p>If you want to start to create a new feature or have any other questions regarding Crouton, <a href="https://github.com/slown1/Xamarin.Crouton/issues/new">file an issue</a>.
 I'll try to answer as soon as I find the time.</p>
 
-<p>Please note, if you're working on a pull request, make sure to use the <a href="https://github.com/keyboardsurfer/Crouton/tree/develop">develop branch</a> as your base.</p>
-
-<h3>
-<a name="user-content-formatting" class="anchor" href="#formatting" aria-hidden="true"><span class="octicon octicon-link"></span></a>Formatting</h3>
-
-<p>For contributors using Eclipse there's a formatter available at the <a href="https://github.com/downloads/keyboardsurfer/Crouton/Crouton_Eclipseformatter.xml">download section</a>.</p>
-
-<p>In order to reduce merging pains on my end, please use this formatter or format your commit in a way similar to it's example.</p>
-
-<p>If you're using IDEA, the Eclipse Formatter plugin should allow you to use the formatter as well.</p>
-
 <h2>
 <a name="user-content-license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
 
