@@ -1,4 +1,4 @@
-Xamarin.Crouton
+Xamarin.Crouton - this project is the Xamarin.Android implementation of <a href='https://github.com/keyboardsurfer/Crouton'> https://github.com/keyboardsurfer/Crouton </a>
 ===============
 
 <article class="markdown-body entry-content" itemprop="mainContentOfPage"><h1>
@@ -23,13 +23,6 @@ You can line up multiple Croutons for display, that will be shown one after anot
   <img alt="Crouton Demo on Google Play" src="https://camo.githubusercontent.com/9e1a34e84a09c0f95303da060457aea4a8899f85/687474703a2f2f646576656c6f7065722e616e64726f69642e636f6d2f696d616765732f6272616e642f656e5f67656e657269635f7267625f776f5f36302e706e67" data-canonical-src="http://developer.android.com/images/brand/en_generic_rgb_wo_60.png" style="max-width:100%;"></a></p>
 
 <p>If you're already using Crouton and just want to download the latest version of the library, follow <a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22de.keyboardsurfer.android.widget%22">this link</a>.</p>
-
-<h2>
-<a name="user-content-changelog" class="anchor" href="#changelog" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://github.com/keyboardsurfer/Crouton/wiki/Changelog">Changelog</a>
-</h2>
-
-<h3>
-<a name="user-content-current-version-184" class="anchor" href="#current-version-184" aria-hidden="true"><span class="octicon octicon-link"></span></a>Current version: 1.8.4</h3>
 
 <h2>
 <a name="user-content-usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
@@ -97,85 +90,6 @@ Crouton.makeText(Activity, int, Style, ViewGroup).show();
 <li>appearance &amp; disappearance Animation</li>
 <li>displayed Image</li>
 </ul><p>Since <a href="https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/Style.java">Style</a> is the general entry point for tweaking Croutons, go and see for yourself what can be done with it.</p>
-
-<h2>
-<a name="user-content-building" class="anchor" href="#building" aria-hidden="true"><span class="octicon octicon-link"></span></a>Building</h2>
-
-<h3>
-<a name="user-content-gradle" class="anchor" href="#gradle" aria-hidden="true"><span class="octicon octicon-link"></span></a>Gradle</h3>
-
-<h4>
-<a name="user-content-from-maven-central" class="anchor" href="#from-maven-central" aria-hidden="true"><span class="octicon octicon-link"></span></a>From maven central</h4>
-
-<p>Add maven central to your <code>build.gradle</code>:</p>
-
-<div class="highlight highlight-groovy"><pre><span class="n">buildscript</span> <span class="o">{</span>
-  <span class="n">repositories</span> <span class="o">{</span>
-    <span class="n">mavenCentral</span><span class="o">()</span>
-  <span class="o">}</span>
-<span class="o">}</span>
-
-<span class="n">repositories</span> <span class="o">{</span>
-  <span class="n">mavenCentral</span><span class="o">()</span>
-<span class="o">}</span>
-</pre></div>
-
-<p>Then declare Crouton within your dependencies:</p>
-
-<div class="highlight highlight-groovy"><pre><span class="n">dependencies</span> <span class="o">{</span>
-  <span class="o">...</span>
-  <span class="n">compile</span><span class="o">(</span><span class="s1">'de.keyboardsurfer.android.widget:crouton:1.8.4'</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// exclusion is not neccessary, but generally a good idea.</span>
-    <span class="n">exclude</span> <span class="nl">group:</span> <span class="s1">'com.google.android'</span><span class="o">,</span> <span class="nl">module:</span> <span class="s1">'support-v4'</span>
-  <span class="o">}</span>
-  <span class="o">...</span>
-<span class="o">}</span>
-</pre></div>
-
-<h3>
-<a name="user-content-maven" class="anchor" href="#maven" aria-hidden="true"><span class="octicon octicon-link"></span></a>Maven</h3>
-
-<h4>
-<a name="user-content-from-maven-central-1" class="anchor" href="#from-maven-central-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>From maven central</h4>
-
-<p>If you are referencing a newer version of the Android Support Library in your application, you might want to exclude Crouton's dependency like this:</p>
-
-<div class="highlight highlight-xml"><pre><span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;artifactId&gt;</span>crouton<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>${crouton.version}<span class="nt">&lt;/version&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>de.keyboardsurfer.android.widget<span class="nt">&lt;/groupId&gt;</span>
-    <span class="nt">&lt;exclusions&gt;</span>
-        <span class="nt">&lt;exclusion&gt;</span>
-            <span class="nt">&lt;groupId&gt;</span>com.android.support<span class="nt">&lt;/groupId&gt;</span>
-            <span class="nt">&lt;artifactId&gt;</span>support-v4<span class="nt">&lt;/artifactId&gt;</span>
-        <span class="nt">&lt;/exclusion&gt;</span>
-    <span class="nt">&lt;/exclusions&gt;</span>
-<span class="nt">&lt;/dependency&gt;</span>
-</pre></div>
-
-<h3>
-<a name="user-content-diy" class="anchor" href="#diy" aria-hidden="true"><span class="octicon octicon-link"></span></a>DIY</h3>
-
-<p>The build requires Gradle. Operations are very simple:</p>
-
-<ul class="task-list">
-<li>install <a href="http://www.gradle.org/">gradle</a>
-</li>
-<li>
-<code>gradle assemble</code> builds all artifacts</li>
-<li>
-<code>gradle jar</code> builds the jar</li>
-</ul><p>After putting Crouton in a repository you can add it as dependency.</p>
-
-<div class="highlight highlight-groovy"><pre><span class="n">compile</span><span class="o">(</span><span class="s1">'de.keyboardsurfer.android.widget:crouton:1.8.4'</span><span class="o">)</span> <span class="o">{</span>
-  <span class="n">exclude</span> <span class="nl">group:</span> <span class="s1">'com.google.android'</span><span class="o">,</span> <span class="nl">module:</span> <span class="s1">'support-v4'</span>
-<span class="o">}</span>
-</pre></div>
-
-<h3>
-<a name="user-content-building-and-signing" class="anchor" href="#building-and-signing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Building and Signing</h3>
-
-<p>In order to build and sign Crouton locally you'll need to rename <code>gradle.properties.sample</code> to <code>gradle.properties</code>.</p>
 
 <h2>
 <a name="user-content-contribution" class="anchor" href="#contribution" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contribution</h2>
