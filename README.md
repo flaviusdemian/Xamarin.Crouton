@@ -1,4 +1,5 @@
-Xamarin.Crouton - this project is the Xamarin.Android implementation of <a href='https://github.com/keyboardsurfer/Crouton'> https://github.com/keyboardsurfer/Crouton </a>
+Xamarin.Crouton
+<p>this project is the Xamarin.Android implementation of <a href='https://github.com/keyboardsurfer/Crouton'> https://github.com/keyboardsurfer/Crouton </a> </p>
 ===============
 
 <article class="markdown-body entry-content" itemprop="mainContentOfPage"><h1>
