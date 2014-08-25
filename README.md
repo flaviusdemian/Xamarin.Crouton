@@ -106,7 +106,7 @@ Crouton.makeText(Activity, int, Style, ViewGroup).show();
 
 <p>Either you found a bug or have created a new and awesome feature, just create a pull request.</p>
 
-<p>If you want to start to create a new feature or have any other questions regarding Crouton, <a href="https://github.com/keyboardsurfer/Crouton/issues/new">file an issue</a>.
+<p>If you want to start to create a new feature or have any other questions regarding Crouton, <a href="https://github.com/slown1/Xamarin.Crouton/issues/new">file an issue</a>.
 I'll try to answer as soon as I find the time.</p>
 
 <p>Please note, if you're working on a pull request, make sure to use the <a href="https://github.com/keyboardsurfer/Crouton/tree/develop">develop branch</a> as your base.</p>
