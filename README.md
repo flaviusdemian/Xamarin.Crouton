@@ -48,16 +48,16 @@ You can line up multiple Croutons for display, that will be shown one after anot
 Crouton.makeText(Activity, int, Style, ViewGroup).Show();
 </code></pre>
 
-<p>Also <code>Crouton.show(...)</code> methods are available for convenient fire and forget display of Croutons. </p>
+<p>Also <code>Crouton.Show(...)</code> methods are available for convenient fire and forget display of Croutons. </p>
 
 <p>If you would like a more graphical introduction to Crouton check out <a href="https://speakerdeck.com/keyboardsurfer/crouton-devfest-berlin-2012">this presentation</a>.</p>
 
 <h2>
 <a name="user-content-important" class="anchor" href="#important" aria-hidden="true"><span class="octicon octicon-link"></span></a>Important!</h2>
 
-<p>In your Activity.onDestroy() make sure to call</p>
+<p>In your Activity.OnDestroy() make sure to call</p>
 
-<pre><code>Crouton.cancelAllCroutons();
+<pre><code>Crouton.CancelAllCroutons();
 </code></pre>
 
 <p>to cancel cancel all scheduled Croutons.</p>
