@@ -33,19 +33,19 @@ You can line up multiple Croutons for display, that will be shown one after anot
 
 <p>Create a Crouton for any CharSequence:</p>
 
-<pre><code>Crouton.makeText(Activity, CharSequence, Style).show();
+<pre><code>Crouton.MakeText(Activity, CharSequence, Style).Show();
 </code></pre>
 
 <p>Create a Crouton with a String from your application's resources:</p>
 
-<pre><code>Crouton.makeText(Activity, int, Style).show();
+<pre><code>Crouton.MakeText(Activity, int, Style).Show();
 </code></pre>
 
 <p>Further you can attach a Crouton to any ViewGroup like this:</p>
 
-<pre><code>Crouton.makeText(Activity, int, Style, int).show();
+<pre><code>Crouton.MakeText(Activity, int, Style, int).Show();
 
-Crouton.makeText(Activity, int, Style, ViewGroup).show();
+Crouton.makeText(Activity, int, Style, ViewGroup).Show();
 </code></pre>
 
 <p>Also <code>Crouton.show(...)</code> methods are available for convenient fire and forget display of Croutons. </p>
